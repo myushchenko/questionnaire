@@ -5,10 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --base-href https://myushchenko.github.io/questionnaire/",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "angular-cli-ghpages"
   },
   "private": true,
   "dependencies": {
@@ -20,7 +21,9 @@
     "@angular/platform-browser": "^2.4.0",
     "@angular/platform-browser-dynamic": "^2.4.0",
     "@angular/router": "^3.4.0",
+    "angularfire2": "^2.0.0-beta.8",
     "core-js": "^2.4.1",
+    "firebase": "^3.7.1",
     "rxjs": "^5.1.0",
     "zone.js": "^0.7.6"
   },
