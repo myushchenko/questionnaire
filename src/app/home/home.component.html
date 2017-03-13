@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <h1>
-        home-page works!
-      </h1>
-    </div>
-  </div>
+    <ul>
+      <li class="text" *ngFor="let item of items | async">
+        {{item.$value}}
+      </li>
+    </ul>
+</div>
 </div>

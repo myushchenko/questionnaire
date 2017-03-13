@@ -4,23 +4,13 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="#">{{title}}</a>
     </div>
-    <div *ngIf="isLoggedIn" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div *ngIf="loggedUser" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a (click)="logout()">Logout</a></li>
+        <li>Hello, {{loggedUser}} <a href="" (click)="logout()">Logout</a></li>
       </ul>
     </div>
   </div>
 </nav>
 <div class="app-content">
   <router-outlet></router-outlet>
-</div>
-
-<div class="container">
-  <div class="row">
-    <ul>
-      <li class="text" *ngFor="let item of items | async">
-        {{item.$value}}
-      </li>
-    </ul>
-</div>
 </div>

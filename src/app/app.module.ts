@@ -10,11 +10,8 @@ import { AuthFirebase } from './providers/auth.firebase';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { FirebaseConfig } from './configs/firebase';
+import { routes } from "./app.routes";
 
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent }
-];
 
 @NgModule({
   imports: [
@@ -22,7 +19,7 @@ const routes: Routes = [
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(FirebaseConfig),
-    RouterModule.forRoot(routes)
+    routes
   ],
   declarations: [
     AppComponent,
