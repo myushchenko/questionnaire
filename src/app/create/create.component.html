@@ -1,3 +1,13 @@
-<p>
-  create works!
-</p>
+<h2>Create new questionnaire</h2>
+
+<div>
+  <md-input-container>
+    <input mdInput placeholder="Name" #name>
+  </md-input-container>
+</div>
+<div>
+<md-input-container>
+  <textarea md-autosize  minRows="3" mdInput placeholder="Description" #description></textarea>
+</md-input-container>
+</div>
+<button class="btn btn-primary" md-button (click)="save(name.value, description.value)">Create</button>

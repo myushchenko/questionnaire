@@ -1,0 +1,7 @@
+<div class="card">
+  <h3 class="card-header">{{questionnaire.name}}</h3>
+  <div class="clearfix"><i class="mr-3 float-right">{{questionnaire.date}}</i></div>
+  <div class="card-block" *ngFor="let q of questionnaire.questions">
+    <p class="card-text">{{q.title}}</p>
+  </div>
+</div>

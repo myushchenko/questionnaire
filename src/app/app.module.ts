@@ -15,6 +15,7 @@ import { routes } from "./app.routes";
 import { CreateComponent } from './create/create.component';
 import { ManageComponent } from './manage/manage.component';
 import { AboutComponent } from './about/about.component';
+import { AnswerComponent } from './answer/answer.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AboutComponent } from './about/about.component';
     HomeComponent,
     CreateComponent,
     ManageComponent,
-    AboutComponent
+    AboutComponent,
+    AnswerComponent
   ],
   providers: [AuthFirebase],
   bootstrap: [AppComponent]
