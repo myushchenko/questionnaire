@@ -7,6 +7,7 @@ import { AuthFirebase } from '../providers/auth.firebase';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   constructor(public afService: AuthFirebase, private router: Router) {}

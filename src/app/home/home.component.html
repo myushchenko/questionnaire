@@ -1,9 +1,10 @@
-<div class="container">
-  <div class="row">
-    <ul>
-      <li class="text" *ngFor="let item of items | async">
-        {{item.$value}}
-      </li>
-    </ul>
-</div>
+<a routerLink="/create" class="btn btn-primary">Create new</a>
+<br/><br/>
+<div class="card">
+  <h3 class="card-header">List of questionnaires</h3>
+  <div class="card-block" *ngFor="let q of questionnaires | async">
+    <h4 class="card-title">{{q.name}}</h4>
+    <p class="card-text"></p>
+    <a href="#" class="btn btn-primary">Answer</a>
+  </div>
 </div>

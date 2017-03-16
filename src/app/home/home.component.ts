@@ -6,13 +6,17 @@ import { AngularFire, FirebaseListObservable } from "angularfire2";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
-  public items: FirebaseListObservable<any[]>;
+  public questionnaires: FirebaseListObservable<any>;
 
   constructor(public af: AngularFire) { 
-    this.items = af.database.list('/items');
+    this.questionnaires = this.af.database.list('/questionnaires');
   }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+      this.questionnaires.subscribe(response=>{
+           console.log(response)
+      });
+  }
 }

@@ -8,6 +8,7 @@ import { AuthFirebase } from './providers/auth.firebase';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   public title = 'My Questionnaire!';
   public loggedUser: any;
