@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable } from "angularfire2";
-import { ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-answer',
@@ -11,13 +11,16 @@ export class AnswerComponent implements OnInit {
   public questionnaire: any;
   private subRoter: any;
   
-  constructor(public af: AngularFire, private route: ActivatedRoute) { 
-  
-  }
+  constructor(public af: AngularFire, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.subRoter = this.route.params.subscribe(params => {
-        this.af.database.object(`questionnaires/${params['id']}`)
+        var id = params['id'];
+        if (!id) {
+            this.router.navigate(['']);
+            return;
+        }
+        this.af.database.object(`questionnaires/${id}`)
           .subscribe(response=>{
               response.questions = response.questions.filter(q=>q.title);
               this.questionnaire = response;
@@ -27,6 +30,10 @@ export class AnswerComponent implements OnInit {
 
   ngOnDestroy() {
     this.subRoter.unsubscribe();
+  }
+  
+  submit() {
+      console.log('submit');
   }
 
 }

@@ -14,9 +14,5 @@ export class HomeComponent implements OnInit {
     this.questionnaires = this.af.database.list('/questionnaires');
   }
 
-  ngOnInit() {
-      this.questionnaires.subscribe(response=>{
-           console.log(response)
-      });
-  }
+  ngOnInit() {}
 }

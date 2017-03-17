@@ -1,13 +1,21 @@
-<h2>Create new questionnaire</h2>
-
-<div>
-  <md-input-container>
-    <input mdInput placeholder="Name" #name>
-  </md-input-container>
+<div class="card">
+  <h3 class="card-header">Create new questionnaire</h3>
+ 
+  <div class="card-block">
+     <div class="row">
+        <md-input-container class="col-md-8">
+            <input mdInput placeholder="Name" #name>
+        </md-input-container>
+     </div>
+     <div class="row">
+            <md-input-container class="col-md-8">
+                <textarea md-autosize  minRows="3" mdInput placeholder="Description" #description></textarea>
+            </md-input-container>
+     </div>
+   </div>
 </div>
-<div>
-<md-input-container>
-  <textarea md-autosize  minRows="3" mdInput placeholder="Description" #description></textarea>
-</md-input-container>
+<br/>
+<div class="float-right">
+    <a routerLink="/" class="btn btn-primary">Cancel</a>
+    <button class="btn btn-success" (click)="save(name.value, description.value)">Create</button>
 </div>
-<button class="btn btn-primary" md-button (click)="save(name.value, description.value)">Create</button>

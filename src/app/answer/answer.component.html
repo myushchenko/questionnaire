@@ -1,7 +1,13 @@
-<div class="card">
+<div class="card" *ngIf="questionnaire">
   <h3 class="card-header">{{questionnaire.name}}</h3>
-  <div class="clearfix"><i class="mr-3 float-right">{{questionnaire.date}}</i></div>
+  <div class="clearfix"><i class="mr-3 float-right">Published at {{questionnaire.date | date:'fullDate'}}</i></div>
   <div class="card-block" *ngFor="let q of questionnaire.questions">
     <p class="card-text">{{q.title}}</p>
+    <question-type [question]="q"></question-type>
   </div>
+</div>
+<br/>
+<div class="float-right">
+    <a routerLink="/" class="btn btn-primary">Cancel</a>
+    <button class="btn btn-success" (click)="submit()">Submit</button>
 </div>

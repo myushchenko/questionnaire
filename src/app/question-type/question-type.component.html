@@ -1,0 +1,8 @@
+<div *ngIf="question">
+    <div *ngFor="let value of question.values">
+        <label>
+            <input type="radio" [value]="value?.value" [(ngModel)]="answer">
+            {{value?.value}}
+        </label>
+    </div>
+</div>
