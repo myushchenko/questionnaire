@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MdSnackBar } from "@angular/material";
+import { MdSnackBar, MdDialog, MdDialogConfig } from "@angular/material";
 import { AngularFire, FirebaseListObservable } from "angularfire2";
 import { Router } from "@angular/router";
+import { AddQuestionModalComponent } from "../add-question-modal/add-question-modal.component";
 
 @Component({
   selector: 'app-create',
@@ -13,11 +14,19 @@ export class CreateComponent implements OnInit {
 
   public questionnaires: FirebaseListObservable<any>;
 
-  constructor(public af: AngularFire, public snackBar: MdSnackBar, private router: Router) { 
+  constructor(public af: AngularFire, public snackBar: MdSnackBar, private router: Router,
+    public dialog: MdDialog) { 
     this.questionnaires = this.af.database.list('/questionnaires');
   }
 
   ngOnInit() {}
+
+  addQuestion() {
+    let config: MdDialogConfig = {
+        width: '600px'
+    }
+    const modalRef = this.dialog.open(AddQuestionModalComponent, config);
+  }
 
   save(name: string, action: string) {
     this.questionnaires.push({

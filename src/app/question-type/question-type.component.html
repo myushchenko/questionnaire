@@ -1,8 +1,23 @@
 <div *ngIf="question">
-    <div *ngFor="let value of question.values">
-        <label>
-            <input type="radio" [value]="value?.value" [(ngModel)]="answer">
-            {{value?.value}}
-        </label>
+    <div [ngSwitch]="question.type">
+        <div *ngSwitchCase="'boolean'">
+            <div *ngFor="let value of question.values">
+                <label>
+                    <input type="radio" [value]="value?.value" [(ngModel)]="answer">
+                    {{value?.value}}
+                </label>
+            </div>
+        </div>
+        <div *ngSwitchCase="'multi_multi'">
+            <div *ngFor="let value of question.values">
+                <label>
+                    <input type="checkbox" [value]="value?.value" [(ngModel)]="answer">
+                    {{value?.value}}
+                </label>
+            </div>
+        </div>
+        <div *ngSwitchCase="'text'">
+            <input type="text" [(ngModel)]="answer">       
+        </div>
     </div>
 </div>

@@ -1,0 +1,14 @@
+<h1 md-dialog-title>Add New Question
+    <button type="button" class="close" aria-label="Close" (click)="dialogRef.close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</h1>
+<div md-dialog-content>
+    <md-select placeholder="Select question type" [(ngModel)]="currentType">
+        <md-option *ngFor="let qType of qTypes" [value]="qType.code">{{ qType.name }}</md-option>
+    </md-select>
+</div>
+<div md-dialog-actions class="float-right">
+    <button type="button" class="btn btn-primary mr-1" (click)="dialogRef.close()">Cancel</button>
+    <button type="button" class="btn btn-success" (click)="dialogRef.close()">Add</button>
+</div>

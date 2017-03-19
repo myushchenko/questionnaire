@@ -14,8 +14,16 @@
      </div>
    </div>
 </div>
-<br/>
-<div class="float-right">
+<div class="card">
+    <h3 class="card-header">Questions</h3>
+    <div class="card-block">
+
+    </div>
+</div>
+<div class="float-left mt-2">
+    <button class="btn btn-outline-primary" (click)="addQuestion()">Add question</button>
+</div>
+<div class="float-right mt-2">
     <a routerLink="/" class="btn btn-primary">Cancel</a>
     <button class="btn btn-success" (click)="save(name.value, description.value)">Create</button>
 </div>

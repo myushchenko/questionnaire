@@ -10,6 +10,7 @@ export class QuestionValue {
 
 export class Question {
     title: string;
+    type: string;
     values: Array<QuestionValue>
     
     constructor(title, values){

@@ -15,7 +15,10 @@ export class QuestionTypeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (['boolean', 'multi_multi'].includes(this.question.type)){
       this.question.values = this.question.values.filter(q=>!!q.value);
+    }
+      
   }
 
 }

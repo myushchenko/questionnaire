@@ -17,6 +17,7 @@ import { ManageComponent } from './manage/manage.component';
 import { AboutComponent } from './about/about.component';
 import { AnswerComponent } from './answer/answer.component';
 import { QuestionTypeComponent } from './question-type/question-type.component';
+import { AddQuestionModalComponent } from './add-question-modal/add-question-modal.component';
 
 
 @NgModule({
@@ -37,8 +38,10 @@ import { QuestionTypeComponent } from './question-type/question-type.component';
     ManageComponent,
     AboutComponent,
     AnswerComponent,
-    QuestionTypeComponent
+    QuestionTypeComponent,
+    AddQuestionModalComponent
   ],
+  entryComponents: [AddQuestionModalComponent],
   providers: [AuthFirebase],
   bootstrap: [AppComponent]
 })
