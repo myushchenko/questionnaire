@@ -10,6 +10,7 @@ import { Question } from '../models/question';
 export class QuestionTypeComponent implements OnInit {
   
   @Input() question: Question;
+  @Input() readonly: boolean;
   public answer: string;
         
   constructor() { }
@@ -18,7 +19,6 @@ export class QuestionTypeComponent implements OnInit {
     if (['boolean', 'multi_multi'].includes(this.question.type)){
       this.question.values = this.question.values.filter(q=>!!q.value);
     }
-      
   }
 
 }

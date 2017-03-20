@@ -13,6 +13,7 @@ import { AddQuestionModalComponent } from "../add-question-modal/add-question-mo
 export class CreateComponent implements OnInit {
 
   public questionnaires: FirebaseListObservable<any>;
+  public questions = [];
 
   constructor(public af: AngularFire, public snackBar: MdSnackBar, private router: Router,
     public dialog: MdDialog) { 
@@ -25,14 +26,19 @@ export class CreateComponent implements OnInit {
     let config: MdDialogConfig = {
         width: '600px'
     }
-    const modalRef = this.dialog.open(AddQuestionModalComponent, config);
+    let dialogRef  = this.dialog.open(AddQuestionModalComponent, config);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`); 
+      this.questions.push(result);
+    });
   }
 
   save(name: string, action: string) {
     this.questionnaires.push({
       date: new Date(),
       name: name,
-      questions: []
+      questions: this.questions
     }).then(()=> {
       this.snackBar.open(name + ' has been created', '', {
         duration: 2000,

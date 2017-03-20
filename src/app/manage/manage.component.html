@@ -1,3 +1,10 @@
-<p>
-  manage works!
-</p>
+<a routerLink="/create" class="btn btn-primary">Create new</a>
+<br/><br/>
+<div class="card">
+  <h3 class="card-header">Questionnaires</h3>
+  <div class="card-block" *ngFor="let q of questionnaires | async">
+    <h4 class="card-title">{{q.name}}</h4>
+    <p class="card-text"></p>
+    <a [routerLink]="['/manage', q.$key]" class="btn btn-primary">Edit</a>
+  </div>
+</div>

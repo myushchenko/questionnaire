@@ -16,8 +16,9 @@
 </div>
 <div class="card">
     <h3 class="card-header">Questions</h3>
-    <div class="card-block">
-
+    <div class="card-block" *ngFor="let q of questions">
+        <p class="card-text">{{q.title}}</p>
+        <question-type [question]="q" [readonly]="1"></question-type>
     </div>
 </div>
 <div class="float-left mt-2">

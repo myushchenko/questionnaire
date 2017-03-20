@@ -1,23 +1,28 @@
 <div *ngIf="question">
-    <div [ngSwitch]="question.type">
+    <div class="float-left" [ngSwitch]="question.type">
         <div *ngSwitchCase="'boolean'">
-            <div *ngFor="let value of question.values">
-                <label>
-                    <input type="radio" [value]="value?.value" [(ngModel)]="answer">
+            <md-radio-group class="example-radio-group" [(ngModel)]="answer">
+                <md-radio-button class="example-radio-button" [disabled]="readonly" 
+                    *ngFor="let value of question.values"
+                    [value]="value?.value">
                     {{value?.value}}
-                </label>
-            </div>
+                </md-radio-button>
+            </md-radio-group>
         </div>
         <div *ngSwitchCase="'multi_multi'">
-            <div *ngFor="let value of question.values">
-                <label>
-                    <input type="checkbox" [value]="value?.value" [(ngModel)]="answer">
-                    {{value?.value}}
-                </label>
-            </div>
+            <section class="example-section" *ngFor="let value of question.values">
+                <md-checkbox class="example-margin" [disabled]="readonly" 
+                    [(ngModel)]="value.answer">{{value?.value}}</md-checkbox>
+            </section>
         </div>
         <div *ngSwitchCase="'text'">
-            <input type="text" [(ngModel)]="answer">       
+            <md-input-container>
+                <input mdInput [disabled]="readonly" [(ngModel)]="answer">
+            </md-input-container>    
         </div>
+    </div>
+    <div class="float-right">
+        <a href="">Edit</a>
+        <a href="">Remove</a>
     </div>
 </div>

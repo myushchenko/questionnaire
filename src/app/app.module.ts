@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +18,7 @@ import { AboutComponent } from './about/about.component';
 import { AnswerComponent } from './answer/answer.component';
 import { QuestionTypeComponent } from './question-type/question-type.component';
 import { AddQuestionModalComponent } from './add-question-modal/add-question-modal.component';
+import { ManageQuestionnaireComponent } from './manage-questionnaire/manage-questionnaire.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { AddQuestionModalComponent } from './add-question-modal/add-question-mod
     AngularFireModule.initializeApp(FirebaseConfig),
     routes,
     NgbModule.forRoot(),
+    ReactiveFormsModule,
     MaterialModule
   ],
   declarations: [
@@ -39,7 +41,8 @@ import { AddQuestionModalComponent } from './add-question-modal/add-question-mod
     AboutComponent,
     AnswerComponent,
     QuestionTypeComponent,
-    AddQuestionModalComponent
+    AddQuestionModalComponent,
+    ManageQuestionnaireComponent
   ],
   entryComponents: [AddQuestionModalComponent],
   providers: [AuthFirebase],
