@@ -11,9 +11,11 @@ export class QuestionValue {
 export class Question {
     title: string;
     type: string;
-    values: Array<QuestionValue>
+    values: Array<any>;
+    //values: Array<QuestionValue>;
     
-    constructor(title, values){
+    constructor(type, title, values){
+        this.type = type;
         this.title = title;
         this.values = values;
     }

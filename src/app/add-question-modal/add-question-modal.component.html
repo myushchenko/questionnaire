@@ -4,28 +4,75 @@
     </button>
 </h1>
 <div md-dialog-content>
-    <div class="row">
-        <md-input-container class="col-md-8">
-            <input mdInput placeholder="Title" [(ngModel)]="question.title">
-        </md-input-container>
-    </div>
-    <div class="row">
-        <md-select class="ml-3 mt-2" 
-            placeholder="Select question type" 
-            [(ngModel)]="question.type"
-            (change)="selectType()">
-            <md-option *ngFor="let qType of qTypes" [value]="qType.code">{{ qType.name }}</md-option>
-        </md-select>
-    </div>
-    <br><p *ngIf="question.values.length">Values:</p>
-    <div class="row" *ngFor="let val of question.values" >
-        <md-input-container class="col-md-8">
-            <input mdInput placeholder="Value" [(ngModel)]="val.value">
-        </md-input-container>
-    </div>
-    <button class="btn btn-sm btn-outline-primary" 
-        ng-if="question.type"
-        (click)="addValue()">Add value</button>
+    <form #formQuestion="ngForm">
+        <div class="response-types">
+            <div class="response-type-container" 
+                [ngClass]="{disabled: responseTypesDisabled}"
+                (click)="responseTypesDisabled || onResponseType(responseType, formQuestion)"
+                *ngFor="let responseType of responseTypes">
+
+                <div class="title" [ngClass]="{'active': responseType.active}">{{responseType.name}}</div>
+
+                <div class="response-type" [ngClass]="{'active':responseType.active}">
+                    <i [ngClass]="responseType.class" *ngIf="responseType.name!='Multipart'"></i>
+                    <i [ngClass]="responseType.class" *ngIf="responseType.name=='Multipart'"></i>
+                    <i [ngClass]="responseType.class" *ngIf="responseType.name=='Multipart'"></i>
+                </div>
+            </div>
+        </div>
+        <div class="question">
+            <div class="row">
+                <div class="col-md-6">
+                    Question
+                </div>
+                <div class="col-md-6" *ngIf="isChoiseQuestionType()">
+                    Choices
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <md-input-container class="col-md-8">
+                        <textarea 
+                            name="title"
+                            md-autosize minRows="3" 
+                            mdInput 
+                            placeholder="Question description..." 
+                            [(ngModel)]="question.title"
+                            required></textarea>
+                    </md-input-container>
+                    <div *ngIf="formQuestion.$submitted">
+                        <p class="red" ng-show="formQuestion.question.$error.maxlength">Maximum length (2000 characters) has been exceeded.</p>
+                        <p class="red" ng-show="formQuestion.question.$error.required">Question field is required.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="isChoiseQuestionType()">
+                    <div class="choice mr20" 
+                        *ngFor="let choice of question.values; let i = index">
+                        <input type="text" name="{{'choice_' + i}}"
+                            class="form-control" 
+                            [(ngModel)]="choice.value" 
+                            required/>
+                        <a class="clickable" (click)="question.values.splice(chKey,1)">X</a>
+                    </div>
+
+                    <div class="red" *ngIf="formQuestion.$submitted && isOptionsLess()">
+                        <p>Can&apos;t be less than 2 options</p>
+                    </div>
+                    <div class="red" *ngIf="isQuestionDuplicate()">
+                        <p>The same values are not allowed</p>
+                    </div>
+                    <div class="red" *ngIf="formQuestion.$submitted && isOptionsEmpty() && !isOptionsLess() && !isQuestionDuplicate()">
+                        <p>Choices cannot be blank</p>
+                    </div>
+                    <input type="button" 
+                        class="btn btn-primary btn-sm" 
+                        *ngIf="!isFullConditional()" 
+                        (click)="addChoiceToQuestion()" 
+                        value="Add an answer choice" />
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 <div md-dialog-actions class="float-right">
     <button type="button" class="btn btn-sm btn-primary mr-1" (click)="dialogRef.close()">Cancel</button>
