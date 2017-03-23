@@ -14,13 +14,21 @@ export class AddQuestionModalComponent {
         { code: 'multi_multi', name: 'Multi answers with one choice' }
     ];
 
+    public btnText = 'Add';
+
     public responseTypes = this.buildResponseTypes();
 
     private result = this.resultType()
 
     public question: Question = new Question('BOOLEAN', '', this.result.boolean);
 
-    constructor(public dialogRef: MdDialogRef<AddQuestionModalComponent>) { }
+    constructor(public dialogRef: MdDialogRef<AddQuestionModalComponent>) {
+        console.log(dialogRef.config.data)
+        if (dialogRef.config && dialogRef.config.data) {
+            Object.assign(this.question, dialogRef.config.data);
+            this.btnText = 'Save';
+        }
+     }
 
     addValue() {
         this.question.values.push(new QuestionValue('', ''));
@@ -28,7 +36,7 @@ export class AddQuestionModalComponent {
 
     save() {
         console.log(this.question)
-        //this.dialogRef.close(this.question);
+        this.dialogRef.close(this.question);
     }
 
     selectType() {

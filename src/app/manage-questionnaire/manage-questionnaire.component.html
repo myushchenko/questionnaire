@@ -1,8 +1,14 @@
 <div class="card" *ngIf="questionnaire">
   <h3 class="card-header">{{questionnaire.name}}</h3>
   <div class="clearfix"><i class="mr-3 float-right">Published at {{questionnaire.date | date:'fullDate'}}</i></div>
-  <div class="card-block" *ngFor="let q of questionnaire.questions">
+  <div class="card-block" *ngFor="let q of questions|async">
     <p class="card-text">{{q.title}}</p>
-    <question-type [question]="q" [readonly]="1"></question-type>
+    <question-type [question]="q" 
+      [readonly]="1" 
+      [questionnaireId]="questionnaireId"
+      [qId]="q.$key"></question-type>
   </div>
+</div>
+<div class="float-left mt-2">
+    <button class="btn btn-outline-primary" (click)="addQuestion()">Add question</button>
 </div>

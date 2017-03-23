@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MdSnackBar, MdDialog, MdDialogConfig } from "@angular/material";
+import { MdSnackBar } from "@angular/material";
 import { AngularFire, FirebaseListObservable } from "angularfire2";
 import { Router } from "@angular/router";
 import { AddQuestionModalComponent } from "../add-question-modal/add-question-modal.component";
+import { QuestionService } from "../services/question.service";
 
 @Component({
     selector: 'app-create',
@@ -16,19 +17,14 @@ export class CreateComponent implements OnInit {
     public questions = [];
 
     constructor(public af: AngularFire, public snackBar: MdSnackBar, private router: Router,
-        public dialog: MdDialog) {
+        public questionService: QuestionService) {
         this.questionnaires = this.af.database.list('/questionnaires');
     }
 
     ngOnInit() { }
 
     addQuestion() {
-        let config: MdDialogConfig = {
-            width: '750px'
-        }
-        let dialogRef = this.dialog.open(AddQuestionModalComponent, config);
-
-        dialogRef.afterClosed().subscribe(result => {
+        this.questionService.addQuestion().subscribe(result => {
             if (result) {
                 this.questions.push(result);
             }

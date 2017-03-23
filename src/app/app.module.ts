@@ -19,7 +19,9 @@ import { AnswerComponent } from './answer/answer.component';
 import { QuestionTypeComponent } from './question-type/question-type.component';
 import { AddQuestionModalComponent } from './add-question-modal/add-question-modal.component';
 import { ManageQuestionnaireComponent } from './manage-questionnaire/manage-questionnaire.component';
-
+import { DialogsService } from "./services/dialogs.service";
+import { ConfirmDialog } from "./shared/confirm-dialog.component";
+import { QuestionService } from "./services/question.service";
 
 @NgModule({
   imports: [
@@ -32,6 +34,9 @@ import { ManageQuestionnaireComponent } from './manage-questionnaire/manage-ques
     ReactiveFormsModule,
     MaterialModule
   ],
+  exports: [
+        ConfirmDialog,
+    ],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -42,10 +47,11 @@ import { ManageQuestionnaireComponent } from './manage-questionnaire/manage-ques
     AnswerComponent,
     QuestionTypeComponent,
     AddQuestionModalComponent,
-    ManageQuestionnaireComponent
+    ManageQuestionnaireComponent,
+    ConfirmDialog
   ],
-  entryComponents: [AddQuestionModalComponent],
-  providers: [AuthFirebase],
+  entryComponents: [AddQuestionModalComponent, ConfirmDialog],
+  providers: [AuthFirebase, DialogsService, QuestionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,10 +23,10 @@
         <div class="question">
             <div class="row">
                 <div class="col-md-6">
-                    Question
+                   <span class="header"> Question</span>
                 </div>
                 <div class="col-md-6" *ngIf="isChoiseQuestionType()">
-                    Choices
+                    <span class="header">Choices</span>
                 </div>
             </div>
             <div class="row">
@@ -35,8 +35,7 @@
                         <textarea 
                             name="title"
                             md-autosize minRows="3" 
-                            mdInput 
-                            placeholder="Question description..." 
+                            mdInput
                             [(ngModel)]="question.title"
                             required></textarea>
                     </md-input-container>
@@ -76,5 +75,5 @@
 </div>
 <div md-dialog-actions class="float-right">
     <button type="button" class="btn btn-sm btn-primary mr-1" (click)="dialogRef.close()">Cancel</button>
-    <button type="button" class="btn btn-sm btn-success" (click)="save()">Add</button>
+    <button type="button" class="btn btn-sm btn-success" (click)="save()">{{btnText}}</button>
 </div>
