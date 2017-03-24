@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MdSnackBar } from "@angular/material";
-import { AngularFire, FirebaseListObservable } from "angularfire2";
-import { Router } from "@angular/router";
-import { AddQuestionModalComponent } from "../add-question-modal/add-question-modal.component";
-import { QuestionService } from "../services/question.service";
+import { MdSnackBar } from '@angular/material';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { Router } from '@angular/router';
+import { AddQuestionModalComponent } from '../add-question-modal/add-question-modal.component';
+import { QuestionService } from '../services/question.service';
 
 @Component({
     selector: 'app-create',

@@ -11,7 +11,7 @@ import { AuthFirebase } from './providers/auth.firebase';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { FirebaseConfig } from './configs/firebase.config';
-import { routes } from "./app.routes";
+import { routes } from './app.routes';
 import { CreateComponent } from './create/create.component';
 import { ManageComponent } from './manage/manage.component';
 import { AboutComponent } from './about/about.component';
@@ -19,9 +19,9 @@ import { AnswerComponent } from './answer/answer.component';
 import { QuestionTypeComponent } from './question-type/question-type.component';
 import { AddQuestionModalComponent } from './add-question-modal/add-question-modal.component';
 import { ManageQuestionnaireComponent } from './manage-questionnaire/manage-questionnaire.component';
-import { DialogsService } from "./services/dialogs.service";
-import { ConfirmDialog } from "./shared/confirm-dialog.component";
-import { QuestionService } from "./services/question.service";
+import { DialogsService } from './services/dialogs.service';
+import { ConfirmDialog } from './shared/confirm-dialog.component';
+import { QuestionService } from './services/question.service';
 
 @NgModule({
   imports: [

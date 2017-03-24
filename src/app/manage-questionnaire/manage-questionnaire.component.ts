@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire } from "angularfire2";
-import { ActivatedRoute, Router } from "@angular/router";
-import { QuestionService } from "../services/question.service";
+import { AngularFire } from 'angularfire2';
+import { ActivatedRoute, Router } from '@angular/router';
+import { QuestionService } from '../services/question.service';
 
 @Component({
   selector: 'app-manage-questionnaire',

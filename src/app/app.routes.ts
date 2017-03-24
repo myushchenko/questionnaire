@@ -1,12 +1,12 @@
-import { Routes, RouterModule } from "@angular/router";
-import { ModuleWithProviders } from "@angular/core";
-import { HomeComponent } from "./home/home.component";
-import { LoginComponent } from "./login/login.component";
-import { CreateComponent } from "./create/create.component";
-import { ManageComponent } from "./manage/manage.component";
-import { AboutComponent } from "./about/about.component";
-import { AnswerComponent } from "./answer/answer.component";
-import { ManageQuestionnaireComponent } from "./manage-questionnaire/manage-questionnaire.component";
+import { Routes, RouterModule } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { CreateComponent } from './create/create.component';
+import { ManageComponent } from './manage/manage.component';
+import { AboutComponent } from './about/about.component';
+import { AnswerComponent } from './answer/answer.component';
+import { ManageQuestionnaireComponent } from './manage-questionnaire/manage-questionnaire.component';
 
 export const router: Routes = [
   { path: '', component: HomeComponent },

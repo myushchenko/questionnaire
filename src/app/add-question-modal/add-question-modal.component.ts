@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { MdDialogRef } from "@angular/material";
-import { QuestionValue, Question } from "../models/question";
+import { MdDialogRef } from '@angular/material';
+import { QuestionValue, Question } from '../models/question';
 import * as _ from 'lodash';
 
 @Component({
@@ -18,12 +18,12 @@ export class AddQuestionModalComponent {
 
     public responseTypes = this.buildResponseTypes();
 
-    private result = this.resultType()
+    private result = this.resultType();
 
     public question: Question = new Question('BOOLEAN', '', this.result.boolean);
 
     constructor(public dialogRef: MdDialogRef<AddQuestionModalComponent>) {
-        console.log(dialogRef.config.data)
+        console.log(dialogRef.config.data);
         if (dialogRef.config && dialogRef.config.data) {
             Object.assign(this.question, dialogRef.config.data);
             this.btnText = 'Save';
@@ -35,7 +35,7 @@ export class AddQuestionModalComponent {
     }
 
     save() {
-        console.log(this.question)
+        console.log(this.question);
         this.dialogRef.close(this.question);
     }
 
@@ -48,7 +48,7 @@ export class AddQuestionModalComponent {
     }
 
     onResponseType(responseType, form) {
-        //form.$submitted = false;
+        // form.$submitted = false;
 
         this.responseTypes.forEach(item => {
             item.active = false;
@@ -73,8 +73,8 @@ export class AddQuestionModalComponent {
     }
 
     private updateQuestion(responseType) {
-        var widgetValues = responseType.id === 'BOOLEAN' ? this.result.boolean : this.isTextQuestionType() ? this.result.text : [];
-        this.question.values = widgetValues;//angular.copy(widgetValues);
+        const widgetValues = responseType.id === 'BOOLEAN' ? this.result.boolean : this.isTextQuestionType() ? this.result.text : [];
+        this.question.values = widgetValues;
         this.question.type = responseType.id;
     }
 
@@ -82,7 +82,7 @@ export class AddQuestionModalComponent {
         if (!this.question.values || this.question.values.length < 2) {
             return false;
         }
-        var filtered = this.question.values.filter(function(item) {
+        const filtered = this.question.values.filter(function(item) {
             return item.value && item.value.length;
         }),
             vals = filtered.map(function(v) {
@@ -102,7 +102,7 @@ export class AddQuestionModalComponent {
     }
 
     isOptionsEmpty() {
-        var isEmpty = false;
+        let isEmpty = false;
 
         if (!this.question.values || this.question.values.length < 1) {
             return false;

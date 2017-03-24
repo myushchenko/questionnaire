@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseListObservable, AngularFire } from "angularfire2";
+import { FirebaseListObservable, AngularFire } from 'angularfire2';
 
 @Component({
     selector: 'app-manage',

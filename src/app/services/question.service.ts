@@ -1,7 +1,7 @@
 
-import { Injectable } from "@angular/core";
-import { MdDialogConfig, MdDialog } from "@angular/material";
-import { AddQuestionModalComponent } from "../add-question-modal/add-question-modal.component";
+import { Injectable } from '@angular/core';
+import { MdDialogConfig, MdDialog } from '@angular/material';
+import { AddQuestionModalComponent } from '../add-question-modal/add-question-modal.component';
 
 @Injectable()
 export class QuestionService {
@@ -11,10 +11,10 @@ export class QuestionService {
     }
 
     public addQuestion() {
-        let config: MdDialogConfig = {
+        const config: MdDialogConfig = {
             width: '750px'
-        }
-        let dialogRef = this.dialog.open(AddQuestionModalComponent, config);
+        };
+        const dialogRef = this.dialog.open(AddQuestionModalComponent, config);
 
         return dialogRef.afterClosed();
     }
