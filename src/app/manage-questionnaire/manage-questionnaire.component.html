@@ -1,6 +1,6 @@
 <div class="card" *ngIf="questionnaire">
   <h3 class="card-header">{{questionnaire.name}}</h3>
-  <div class="clearfix"><i class="mr-3 float-right">Published at {{questionnaire.date | date:'fullDate'}}</i></div>
+  <div class="clearfix"><i class="mr-3 float-right">Saved on {{questionnaire.date | date:'fullDate'}} at {{questionnaire.date | date:'mediumTime'}}</i></div>
   <div class="card-block" *ngFor="let q of questions|async">
     <p class="card-text">{{q.title}}</p>
     <question-type [question]="q" 

@@ -22,6 +22,7 @@ import { ManageQuestionnaireComponent } from './manage-questionnaire/manage-ques
 import { DialogsService } from './services/dialogs.service';
 import { ConfirmDialog } from './shared/confirm-dialog.component';
 import { QuestionService } from './services/question.service';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   imports: [
@@ -51,7 +52,7 @@ import { QuestionService } from './services/question.service';
     ConfirmDialog
   ],
   entryComponents: [AddQuestionModalComponent, ConfirmDialog],
-  providers: [AuthFirebase, DialogsService, QuestionService],
+  providers: [AuthFirebase, ApiService, DialogsService, QuestionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

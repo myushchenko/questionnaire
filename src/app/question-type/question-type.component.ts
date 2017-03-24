@@ -3,8 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Question } from '../models/question';
 import { MdDialogConfig, MdDialog } from '@angular/material';
 import { AddQuestionModalComponent } from '../add-question-modal/add-question-modal.component';
-import { AngularFire } from 'angularfire2';
 import { DialogsService } from '../services/dialogs.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
     selector: 'question-type',
@@ -19,7 +19,7 @@ export class QuestionTypeComponent implements OnInit {
     @Input() readonly: boolean;
     public answer: string;
 
-    constructor(public af: AngularFire, public dialog: MdDialog, private dialogsService: DialogsService) {
+    constructor(public dialog: MdDialog, private dialogsService: DialogsService, private api: ApiService) {
 
     }
 
@@ -27,7 +27,7 @@ export class QuestionTypeComponent implements OnInit {
         if (['BOOLEAN', 'MULTI_CHOICE_MULTI'].includes(this.question.type)) {
             this.question.values = this.question.values.filter(q => !!q.value);
         }
-        console.log(this.questionnaireId);
+        this.api.setBaseUrl(this.questionnaireId);
     }
 
     editQuestion(event) {
@@ -40,6 +40,7 @@ export class QuestionTypeComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             Object.assign(this.question, result);
+            this.api.udateQuestion(this.qId, this.question);
         });
     }
 
@@ -50,7 +51,7 @@ export class QuestionTypeComponent implements OnInit {
             .confirm('Confirm Delete', 'Are you sure you want delete question?')
             .subscribe(res => {
                 if (res) {
-                    this.af.database.object(`questionnaires/${this.questionnaireId}/questions/${this.qId}`).remove();
+                    this.api.removeQuestion(this.qId);
                 }
             });
     }
