@@ -6,5 +6,6 @@
     <h4 class="card-title">{{q.name}}</h4>
     <p class="card-text"></p>
     <a [routerLink]="['/manage', q.$key]" class="btn btn-primary">Edit</a>
+    <button (click)="remove(q.$key)" class="btn btn-primary">Remove</button>
   </div>
 </div>

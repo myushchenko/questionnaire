@@ -12,7 +12,7 @@
         <div *ngSwitchCase="'MULTI_CHOICE_MULTI'">
             <section class="example-section" *ngFor="let value of question.values">
                 <md-checkbox class="example-margin" [disabled]="readonly" 
-                    [(ngModel)]="question.answer">{{value?.value}}</md-checkbox>
+                    [(ngModel)]="value.answer">{{value?.value}}</md-checkbox>
             </section>
         </div>
         <div *ngSwitchCase="'MULTI_CHOICE_SINGLE'">

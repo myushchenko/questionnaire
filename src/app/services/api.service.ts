@@ -18,6 +18,10 @@ export class ApiService {
         return this.af.database.list('questionnaires');
     }
 
+     public removeQuestionnaire(qId) {
+        this.af.database.object(`/questionnaires/${qId}`).remove();
+    }
+
      public getReponseList() {
         return this.af.database.list('responses');
     }

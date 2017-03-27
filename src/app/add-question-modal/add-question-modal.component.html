@@ -31,14 +31,11 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <md-input-container class="col-md-8">
-                        <textarea 
-                            name="title"
-                            md-autosize minRows="3" 
-                            mdInput
-                            [(ngModel)]="question.title"
-                            required></textarea>
-                    </md-input-container>
+                    <textarea 
+                        name="title"
+                        rows="3"
+                        [(ngModel)]="question.title"
+                        required></textarea>
                     <div *ngIf="formQuestion.$submitted">
                         <p class="red" ng-show="formQuestion.question.$error.maxlength">Maximum length (2000 characters) has been exceeded.</p>
                         <p class="red" ng-show="formQuestion.question.$error.required">Question field is required.</p>
@@ -75,5 +72,8 @@
 </div>
 <div md-dialog-actions class="float-right">
     <button type="button" class="btn btn-sm btn-primary mr-1" (click)="dialogRef.close()">Cancel</button>
-    <button type="button" class="btn btn-sm btn-success" (click)="save()">{{btnText}}</button>
+    <button type="button" 
+        class="btn btn-sm btn-success"
+        [ngClass]="{'btn-danger': formQuestion.form.invalid}" 
+        (click)="formQuestion.form.invalid ||save()">{{btnText}}</button>
 </div>

@@ -1,29 +1,43 @@
-<div class="card">
-    <h3 class="card-header">Create new questionnaire</h3>
-    <div class="card-block">
-        <div class="row">
-            <md-input-container class="col-md-8">
-                <input mdInput placeholder="Name" #name>
-            </md-input-container>
-        </div>
-        <div class="row">
-            <md-input-container class="col-md-8">
-                <textarea md-autosize minRows="3" mdInput placeholder="Description" #description></textarea>
-            </md-input-container>
+<form #formQ="ngForm">
+    <div class="card">
+        <h3 class="card-header">Create new questionnaire</h3>
+        <div class="card-block">
+            <div class="row">
+                <md-input-container class="col-md-8">
+                    <input name="name"
+                        mdInput 
+                        placeholder="Name" 
+                        [(ngModel)]="name" 
+                        required/>
+                </md-input-container>
+            </div>
+            <div class="row">
+                <md-input-container class="col-md-8">
+                    <textarea name="description" 
+                        md-autosize 
+                        minRows="3" 
+                        mdInput 
+                        placeholder="Description" 
+                        [(ngModel)]="description" 
+                        required></textarea>
+                </md-input-container>
+            </div>
         </div>
     </div>
-</div>
-<div class="card">
-    <h3 class="card-header">Questions</h3>
-    <div class="card-block" *ngFor="let q of questions">
-        <p class="card-text">{{q.title}}</p>
-        <question-type [question]="q" [readonly]="1"></question-type>
+    <div class="card">
+        <h3 class="card-header">Questions</h3>
+        <div class="card-block" *ngFor="let q of questions">
+            <p class="card-text">{{q.title}}</p>
+            <question-type [question]="q" [readonly]="1"></question-type>
+        </div>
     </div>
-</div>
-<div class="float-left mt-2">
-    <button class="btn btn-outline-primary" (click)="addQuestion()">Add question</button>
-</div>
-<div class="float-right mt-2">
-    <a routerLink="/" class="btn btn-primary">Cancel</a>
-    <button class="btn btn-success" (click)="save(name.value, description.value)">Create</button>
-</div>
+    <div class="float-left mt-2">
+        <button class="btn btn-outline-primary" (click)="addQuestion()">Add question</button>
+    </div>
+    <div class="float-right mt-2">
+        <a routerLink="/" class="btn btn-primary">Cancel</a>
+        <button class="btn btn-success" 
+            [ngClass]="{'btn-danger': formQ.form.invalid || !questions.length}" 
+            (click)="save()">Create</button>
+    </div>
+</form>
