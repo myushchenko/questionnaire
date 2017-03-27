@@ -17,6 +17,7 @@ export class QuestionTypeComponent implements OnInit {
     @Input() question: Question;
     @Input() qId: any;
     @Input() readonly: boolean;
+    @Input() edit: boolean;
     public answer: string;
 
     constructor(public dialog: MdDialog, private dialogsService: DialogsService, private api: ApiService) {
@@ -39,8 +40,10 @@ export class QuestionTypeComponent implements OnInit {
         const dialogRef = this.dialog.open(AddQuestionModalComponent, config);
 
         dialogRef.afterClosed().subscribe(result => {
-            Object.assign(this.question, result);
-            this.api.udateQuestion(this.qId, this.question);
+            if (result) {
+                Object.assign(this.question, result);
+                this.api.udateQuestion(this.qId, this.question);
+            }
         });
     }
 
@@ -49,11 +52,7 @@ export class QuestionTypeComponent implements OnInit {
 
         this.dialogsService
             .confirm('Confirm Delete', 'Are you sure you want delete question?')
-            .subscribe(res => {
-                if (res) {
-                    this.api.removeQuestion(this.qId);
-                }
-            });
+            .subscribe(res => res && this.api.removeQuestion(this.qId));
     }
 
 }

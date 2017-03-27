@@ -8,10 +8,10 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 })
 
 export class HomeComponent implements OnInit {
-  public questionnaires: FirebaseListObservable<any>;
+  public questionnaireList: FirebaseListObservable<any>;
 
   constructor(public af: AngularFire) {
-    this.questionnaires = this.af.database.list('/questionnaires');
+    this.questionnaireList = this.af.database.list('/questionnaires');
   }
 
   ngOnInit() {}

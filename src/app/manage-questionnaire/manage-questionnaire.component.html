@@ -5,6 +5,7 @@
     <p class="card-text">{{q.title}}</p>
     <question-type [question]="q" 
       [readonly]="1" 
+      [edit]="1"
       [questionnaireId]="questionnaireId"
       [qId]="q.$key"></question-type>
   </div>

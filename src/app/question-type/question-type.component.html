@@ -1,7 +1,7 @@
 <div *ngIf="question">
     <div class="float-left" [ngSwitch]="question.type">
         <div *ngSwitchCase="'BOOLEAN'">
-            <md-radio-group class="example-radio-group" [(ngModel)]="answer">
+            <md-radio-group class="example-radio-group" [(ngModel)]="question.answer">
                 <md-radio-button class="example-radio-button" [disabled]="readonly" 
                     *ngFor="let value of question.values"
                     [value]="value?.value">
@@ -12,16 +12,36 @@
         <div *ngSwitchCase="'MULTI_CHOICE_MULTI'">
             <section class="example-section" *ngFor="let value of question.values">
                 <md-checkbox class="example-margin" [disabled]="readonly" 
-                    [(ngModel)]="value.answer">{{value?.value}}</md-checkbox>
+                    [(ngModel)]="question.answer">{{value?.value}}</md-checkbox>
             </section>
         </div>
-        <div *ngSwitchCase="'SHORT_ANSWER'">
+        <div *ngSwitchCase="'MULTI_CHOICE_SINGLE'">
+            <md-radio-group class="example-radio-group" [(ngModel)]="answer">
+                <md-radio-button class="example-radio-button" [disabled]="readonly" 
+                    *ngFor="let value of question.values"
+                    [(ngModel)]="question.answer">
+                    {{value?.value}}
+                </md-radio-button>
+            </md-radio-group>
+        </div>
+        <div *ngSwitchCase="'LONG_ANSWER'">
             <md-input-container>
-                <input mdInput [disabled]="readonly" [(ngModel)]="answer">
+                <textarea minRows="2" 
+                    mdInput
+                    [disabled]="readonly"
+                    [(ngModel)]="question.answer"
+                    required>
+                </textarea>
+            </md-input-container> 
+               
+        </div>
+        <div *ngSwitchCase="['SHORT_ANSWER', 'NUMERICAL']">
+            <md-input-container>
+                <input mdInput [disabled]="readonly" [(ngModel)]="question.answer">
             </md-input-container>    
         </div>
     </div>
-    <div class="float-right" *ngIf="readonly">
+    <div class="float-right" *ngIf="edit">
         <a href="" class="clickable" (click)="editQuestion($event)">Edit</a>
         <a href="" class="clickable" (click)="removeQuestion($event)">Remove</a>
     </div>
