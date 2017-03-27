@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AuthFirebase } from './providers/auth.firebase';
@@ -29,6 +30,7 @@ import { ResponseDetailsComponent } from './response-details/response-details.co
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(FirebaseConfig),

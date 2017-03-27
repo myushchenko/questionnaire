@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseListObservable, AngularFire } from "angularfire2";
+import { FirebaseListObservable } from 'angularfire2';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-response',
@@ -10,11 +11,10 @@ export class ResponseComponent implements OnInit {
 
   public responseList: FirebaseListObservable<any>;
 
-  constructor(public af: AngularFire) {
-    this.responseList = this.af.database.list('/responses');
+  constructor(private apiService: ApiService) {
+    this.responseList = apiService.getReponseList();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

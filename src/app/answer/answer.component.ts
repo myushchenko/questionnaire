@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MdSnackBar } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
     selector: 'app-answer',
@@ -10,24 +9,17 @@ import { MdSnackBar } from '@angular/material';
 })
 export class AnswerComponent implements OnInit {
     public questionnaire: any;
-    private responses: FirebaseListObservable<any[]>;
-    public questions: any;
     public questionsList: any;
     private subRoter: any;
 
-    constructor(public af: AngularFire, private route: ActivatedRoute, 
-        private router: Router,
-        public snackBar: MdSnackBar) { }
+    constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
     ngOnInit() {
         this.subRoter = this.route.params.subscribe(params => {
             const id = params['id'];
-            this.af.database.object(`questionnaires/${id}`).subscribe(response => {
-                this.questionnaire = response;
-                console.log(this.questionnaire)
-            });
-            this.questionsList = this.af.database.list(`questionnaires/${id}/questions`);
-            this.responses = this.af.database.list('/responses');
+            this.apiService.setBaseUrl(id);
+            this.apiService.getQuestionnaire().subscribe(response => this.questionnaire = response);
+            this.questionsList = this.apiService.getQuestionList();
         });
     }
 
@@ -36,18 +28,7 @@ export class AnswerComponent implements OnInit {
     }
 
     submit(questions) {
-        console.log(questions);
-        this.responses.push({
-            date: new Date(),
-            name: this.questionnaire.name,
-            questions: questions
-        }).then(() => {
-            this.snackBar.open(this.questionnaire.name + ' has been completed', '', {
-                duration: 2000,
-            }).afterDismissed().subscribe(() => {
-                this.router.navigate(['/']);
-            });
-        });
+        this.apiService.submit(this.questionnaire.name, questions);
     }
 
 }

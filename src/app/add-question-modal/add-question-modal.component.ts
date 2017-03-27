@@ -23,7 +23,6 @@ export class AddQuestionModalComponent {
     public question: Question = new Question('BOOLEAN', '', this.result.boolean);
 
     constructor(public dialogRef: MdDialogRef<AddQuestionModalComponent>) {
-        console.log(dialogRef.config.data);
         if (dialogRef.config && dialogRef.config.data) {
             Object.assign(this.question, dialogRef.config.data);
             this.btnText = 'Save';
@@ -35,7 +34,6 @@ export class AddQuestionModalComponent {
     }
 
     save() {
-        console.log(this.question);
         this.dialogRef.close(this.question);
     }
 
@@ -125,11 +123,11 @@ export class AddQuestionModalComponent {
         return this.isConditionalQuestionType() && this.question.values.length >= 2;
     }
 
-    private isChoiseQuestionType() {
+    public isChoiseQuestionType() {
         return ['BOOLEAN', 'MULTI_CHOICE_MULTI', 'MULTI_CHOICE_SINGLE'].includes(this.question.type);
     }
 
-    private isTextQuestionType() {
+    public isTextQuestionType() {
         return ['DATE_TYPE', 'SHORT_ANSWER', 'LONG_ANSWER', 'NUMERICAL'].includes(this.question.type);
     }
 
