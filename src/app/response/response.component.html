@@ -1,11 +1,37 @@
-<div class="card">
-  <h3 class="card-header">Responses</h3>
-  <div *ngIf="responseList | async as responses; else loading;">
-    <div class="card-block" *ngFor="let q of responses">
-      <h4 class="card-title">{{q.name}}</h4>
-      <p class="card-text"></p>
-      <a [routerLink]="['/response', q.$key]" class="btn btn-primary">View</a>
-    </div>
-  </div>
+<div *ngIf="responseList |  async as responses; else loading;">
+    <md-tab-group>
+        <md-tab label="All Responses">
+            <div class="card">
+
+                <div class="card-block" *ngFor="let q of responses">
+                    <h4 class="card-title">{{q.name}}</h4>
+                    <i class="card-text">{{q.description}}</i><br><br>
+                    <a [routerLink]="['/response', q.$key]" class="btn btn-primary">View</a>
+                </div>
+
+                <div class="no-text" *ngIf="!responses.length">
+                    No responses
+                </div>
+            </div>
+        </md-tab>
+        <md-tab label="My Responses">
+            <div class="card">
+
+                <div class="card-block" *ngFor="let q of responses | filter:{submittedById: currentUserId};">
+                    <h4 class="card-title">{{q.name}}</h4>
+                    <i class="card-text">{{q.description}}</i><br><br>
+                    <a [routerLink]="['/response', q.$key]" class="btn btn-primary">View</a>
+                    <button (click)="remove(q.$key)" class="btn btn-primary">Remove</button>
+                </div>
+
+                <div class="no-text" *ngIf="!responses.length">
+                    No responses
+                </div>
+            </div>
+        </md-tab>
+    </md-tab-group>
 </div>
-<ng-template #loading><div class="loader"></div></ng-template>
+
+<ng-template #loading>
+    <div class="loader"></div>
+</ng-template>

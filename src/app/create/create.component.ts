@@ -15,6 +15,7 @@ export class CreateComponent implements OnInit {
     public questionnaires: FirebaseListObservable<any>;
     public questions = [];
     public name: string;
+    public description: string;
 
     constructor(public questionService: QuestionService, private apiService: ApiService) {
         this.questionnaires = this.apiService.getQuestionnaireList();
@@ -31,6 +32,6 @@ export class CreateComponent implements OnInit {
     }
 
     save() {
-        this.apiService.create(this.name, this.questions);
+        this.apiService.create(this.name, this.description, this.questions);
     }
 }

@@ -4,8 +4,8 @@
   <h3 class="card-header">Questionnaires</h3>
   <div class="card-block" *ngFor="let q of questionnaires | async">
     <h4 class="card-title">{{q.name}}</h4>
-    <p class="card-text"></p>
-    <a [routerLink]="['/manage', q.$key]" class="btn btn-primary">Edit</a>
-    <button (click)="remove(q.$key)" class="btn btn-primary">Remove</button>
+    <div *ngIf="q.description"><i class="card-text">{{q.description}}</i><br><br></div>
+    <a *ngIf="isCurrentUser(q)"  [routerLink]="['/manage', q.$key]" class="btn btn-primary">Edit</a>
+    <button *ngIf="isCurrentUser(q)" (click)="remove(q.$key)" class="btn btn-primary">Remove</button>
   </div>
 </div>

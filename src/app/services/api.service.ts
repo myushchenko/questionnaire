@@ -24,6 +24,10 @@ export class ApiService {
         this.af.database.object(`/questionnaires/${qId}`).remove();
     }
 
+    public removeReponse(qId) {
+        this.af.database.object(`/responses/${qId}`).remove();
+    }
+
     public getReponseList() {
         return this.af.database.list('responses');
     }
@@ -49,15 +53,15 @@ export class ApiService {
         this.af.database.object(this.baseUrl + `/questions/${qId}`).remove();
     }
 
-    public create(name, questions) {
-        this.saveQuestionnaire(name, questions, 'questionnaires', ' has been created');
+    public create(name, description, questions) {
+        this.saveQuestionnaire(name, description, questions, 'questionnaires', ' has been created', '');
     }
 
-    public submit(name, questions) {
-        this.saveQuestionnaire(name, questions, 'responses', ' has been completed');
+    public submit(name, description, questions) {
+        this.saveQuestionnaire(name, description, questions, 'responses', ' has been completed', 'responses');
     }
 
-    private saveQuestionnaire(name, origQuestions, type, msg) {
+    private saveQuestionnaire(name, description, origQuestions, type, msg, link) {
         const questions = origQuestions.map(q => {
             q = { ...q };
 
@@ -69,6 +73,7 @@ export class ApiService {
         const playload = {
             date: new Date().toString(),
             name,
+            description,
             submittedBy: this.authService.currentUser.fullName,
             submittedById: this.authService.currentUser.email,
             questions
@@ -78,7 +83,7 @@ export class ApiService {
             this.snackBar.open(name + msg, '', {
                 duration: 2000,
             }).afterDismissed().subscribe(() => {
-                this.router.navigate(['/']);
+                this.router.navigate(['/' + link]);
             });
         });
     }

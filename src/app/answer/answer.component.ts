@@ -28,7 +28,7 @@ export class AnswerComponent implements OnInit {
     }
 
     submit(questions) {
-        this.apiService.submit(this.questionnaire.name, questions);
+        this.apiService.submit(this.questionnaire.name, this.questionnaire.description, questions);
     }
 
 }

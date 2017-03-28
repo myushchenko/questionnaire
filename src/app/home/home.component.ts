@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { AuthService } from '../services/auth.service';
+import { FirebaseListObservable } from 'angularfire2';
+import { ApiService } from '../services/api.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.less']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.less']
 })
 
 export class HomeComponent implements OnInit {
-  public questionnaireList: FirebaseListObservable<any>;
+    public questionnaireList: FirebaseListObservable<any>;
 
-  constructor(public af: AngularFire, private authService: AuthService) {
-    this.questionnaireList = this.af.database.list('/questionnaires');
-    console.log('home: ', this.authService.currentUser);
-  }
+    constructor(private apiService: ApiService) { }
 
-  ngOnInit() {}
+    ngOnInit() {
+        this.questionnaireList = this.apiService.getQuestionnaireList();
+    }
 }

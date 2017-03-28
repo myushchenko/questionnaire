@@ -29,6 +29,7 @@ import { ResponseDetailsComponent } from './response-details/response-details.co
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { DatepickerModule } from 'angular2-material-datepicker';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   imports: [
@@ -59,7 +60,8 @@ import { DatepickerModule } from 'angular2-material-datepicker';
     ManageQuestionnaireComponent,
     ConfirmDialog,
     ResponseComponent,
-    ResponseDetailsComponent
+    ResponseDetailsComponent,
+    FilterPipe
   ],
   entryComponents: [AddQuestionModalComponent, ConfirmDialog],
   providers: [AuthGuard, AuthService, AuthFirebase, ApiService, DialogsService, QuestionService],

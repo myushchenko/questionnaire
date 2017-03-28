@@ -21,8 +21,8 @@ export class AppComponent {
 
     private initLoginUser() {
         this.authService.auth.subscribe((res) => {
-            if (res.auth) {
-                this.loggedUser = res.auth.displayName;
+            if (res && res.auth) {
+                this.loggedUser = res.google.displayName;
                 return;
             }
             this.router.navigate(['/login']);
