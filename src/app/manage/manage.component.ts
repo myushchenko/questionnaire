@@ -6,7 +6,7 @@ import { DialogsService } from '../services/dialogs.service';
 @Component({
     selector: 'app-manage',
     templateUrl: './manage.component.html',
-    styleUrls: ['./manage.component.css']
+    styleUrls: ['./manage.component.less']
 })
 
 export class ManageComponent implements OnInit {

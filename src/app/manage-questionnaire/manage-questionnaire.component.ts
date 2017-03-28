@@ -6,7 +6,7 @@ import { QuestionService } from '../services/question.service';
 @Component({
   selector: 'app-manage-questionnaire',
   templateUrl: './manage-questionnaire.component.html',
-  styleUrls: ['./manage-questionnaire.component.css']
+  styleUrls: ['./manage-questionnaire.component.less']
 })
 export class ManageQuestionnaireComponent implements OnInit {
 

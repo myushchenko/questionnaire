@@ -25,20 +25,31 @@
             </md-radio-group>
         </div>
         <div *ngSwitchCase="'LONG_ANSWER'">
-            <md-input-container>
+            <md-input-container *ngIf="!readonly">
                 <textarea minRows="2" 
                     mdInput
                     [disabled]="readonly"
                     [(ngModel)]="question.answer"
                     required>
                 </textarea>
-            </md-input-container> 
-               
+            </md-input-container>
+            <div *ngIf="readonly" class="long-answer-readonly"></div>
         </div>
-        <div *ngSwitchCase="['SHORT_ANSWER', 'NUMERICAL']">
-            <md-input-container>
+        <div *ngSwitchCase="'SHORT_ANSWER'">
+            <md-input-container *ngIf="!readonly">
                 <input mdInput [disabled]="readonly" [(ngModel)]="question.answer">
-            </md-input-container>    
+            </md-input-container>
+            <div *ngIf="readonly" class="short-answer-readonly">{{question.answer}}</div> 
+        </div>
+        <div *ngSwitchCase="'NUMERICAL'">
+            <md-input-container *ngIf="!readonly">
+                <input mdInput [disabled]="readonly" [(ngModel)]="question.answer">
+            </md-input-container>
+            <div *ngIf="readonly" class="short-answer-readonly">{{question.answer}}</div> 
+        </div>
+        <div *ngSwitchCase="'DATE_TYPE'">
+            <material-datepicker *ngIf="!readonly" [(date)]="question.answer"></material-datepicker>
+            <div *ngIf="readonly" class="short-answer-readonly">{{question.answer | date:'mediumDate'}}</div> 
         </div>
     </div>
     <div class="float-right" *ngIf="edit">

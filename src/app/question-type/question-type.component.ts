@@ -9,7 +9,7 @@ import { ApiService } from '../services/api.service';
 @Component({
     selector: 'question-type',
     templateUrl: './question-type.component.html',
-    styleUrls: ['./question-type.component.css']
+    styleUrls: ['./question-type.component.less']
 })
 export class QuestionTypeComponent implements OnInit {
 

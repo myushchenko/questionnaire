@@ -7,7 +7,7 @@ import { FirebaseListObservable } from 'angularfire2';
 @Component({
     selector: 'app-create',
     templateUrl: './create.component.html',
-    styleUrls: ['./create.component.css']
+    styleUrls: ['./create.component.less']
 })
 
 export class CreateComponent implements OnInit {

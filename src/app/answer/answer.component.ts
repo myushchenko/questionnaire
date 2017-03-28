@@ -5,7 +5,7 @@ import { ApiService } from '../services/api.service';
 @Component({
     selector: 'app-answer',
     templateUrl: './answer.component.html',
-    styleUrls: ['./answer.component.css']
+    styleUrls: ['./answer.component.less']
 })
 export class AnswerComponent implements OnInit {
     public questionnaire: any;

@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { AngularFire } from 'angularfire2';
 import { MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ApiService {
 
     private baseUrl: string;
 
-    constructor(private af: AngularFire, private router: Router, private snackBar: MdSnackBar) { }
+    constructor(private af: AngularFire, private router: Router,
+        private snackBar: MdSnackBar, private authService: AuthService) { }
 
     public setBaseUrl(id) {
         this.baseUrl = `questionnaires/${id}`;
@@ -18,11 +20,11 @@ export class ApiService {
         return this.af.database.list('questionnaires');
     }
 
-     public removeQuestionnaire(qId) {
+    public removeQuestionnaire(qId) {
         this.af.database.object(`/questionnaires/${qId}`).remove();
     }
 
-     public getReponseList() {
+    public getReponseList() {
         return this.af.database.list('responses');
     }
 
@@ -55,10 +57,20 @@ export class ApiService {
         this.saveQuestionnaire(name, questions, 'responses', ' has been completed');
     }
 
-    private saveQuestionnaire(name, questions, type, msg) {
+    private saveQuestionnaire(name, origQuestions, type, msg) {
+        const questions = origQuestions.map(q => {
+            q = { ...q };
+
+            if (q.type === 'DATE_TYPE') {
+                q.answer = q.answer && q.answer.toString();
+            }
+            return q;
+        });
         const playload = {
             date: new Date().toString(),
             name,
+            submittedBy: this.authService.currentUser.fullName,
+            submittedById: this.authService.currentUser.email,
             questions
         };
 

@@ -26,6 +26,9 @@ import { QuestionService } from './services/question.service';
 import { ApiService } from './services/api.service';
 import { ResponseComponent } from './response/response.component';
 import { ResponseDetailsComponent } from './response-details/response-details.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { DatepickerModule } from 'angular2-material-datepicker';
 
 @NgModule({
   imports: [
@@ -37,7 +40,8 @@ import { ResponseDetailsComponent } from './response-details/response-details.co
     routes,
     NgbModule.forRoot(),
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    DatepickerModule
   ],
   exports: [
         ConfirmDialog,
@@ -58,7 +62,7 @@ import { ResponseDetailsComponent } from './response-details/response-details.co
     ResponseDetailsComponent
   ],
   entryComponents: [AddQuestionModalComponent, ConfirmDialog],
-  providers: [AuthFirebase, ApiService, DialogsService, QuestionService],
+  providers: [AuthGuard, AuthService, AuthFirebase, ApiService, DialogsService, QuestionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
