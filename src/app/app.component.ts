@@ -22,7 +22,11 @@ export class AppComponent {
     private initLoginUser() {
         this.authService.auth.subscribe((res) => {
             if (res && res.auth) {
-                this.loggedUser = res.google.displayName;
+                if (res.google) {
+                    this.loggedUser = res.google.displayName;
+                    return;
+                }
+                this.loggedUser = res.auth.email;
                 return;
             }
             this.router.navigate(['/login']);

@@ -16,4 +16,29 @@ export class AuthFirebase {
     logout() {
         return this.af.auth.logout();
     }
+
+    registerUser(email, password) {
+        return this.af.auth.createUser({
+            email: email,
+            password: password
+        });
+    }
+
+    saveUserInfoFromForm(uid, name, email) {
+        return this.af.database.object('registeredUsers/' + uid).set({
+            name: name,
+            email: email,
+        });
+    }
+
+    loginWithEmail(email, password) {
+        return this.af.auth.login({
+            email: email,
+            password: password
+        }, {
+                provider: AuthProviders.Password,
+                method: AuthMethods.Password
+            }
+        );
+    }
 }

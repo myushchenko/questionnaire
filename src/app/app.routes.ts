@@ -10,10 +10,12 @@ import { ManageQuestionnaireComponent } from './manage-questionnaire/manage-ques
 import { ResponseComponent } from './response/response.component';
 import { ResponseDetailsComponent } from './response-details/response-details.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 
 export const router: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegistrationPageComponent },
     { path: 'create', component: CreateComponent, canActivate: [AuthGuard] },
     { path: 'manage', component: ManageComponent, canActivate: [AuthGuard] },
     { path: 'manage/:id', component: ManageQuestionnaireComponent, canActivate: [AuthGuard] },

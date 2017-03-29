@@ -31,6 +31,7 @@ import { DatepickerModule } from 'angular2-material-datepicker';
 import { FilterPipe } from './pipes/filter.pipe';
 import { QuestionnaireService } from './services/questionnaire.service';
 import { ResponseService } from './services/response.service';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 
 @NgModule({
     imports: [
@@ -62,7 +63,8 @@ import { ResponseService } from './services/response.service';
         ConfirmDialog,
         ResponseComponent,
         ResponseDetailsComponent,
-        FilterPipe
+        FilterPipe,
+        RegistrationPageComponent
     ],
     entryComponents: [AddQuestionModalComponent, ConfirmDialog],
     providers: [AuthGuard, AuthService, AuthFirebase, QuestionnaireService, ResponseService, DialogsService, QuestionService],

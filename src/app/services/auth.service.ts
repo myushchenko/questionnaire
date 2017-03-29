@@ -7,20 +7,10 @@ import { AngularFireAuth } from 'angularfire2';
 export class AuthService {
 
     public currentUser: User;
-
     public auth: AngularFireAuth;
 
     constructor(public afService: AuthFirebase) {
         this.auth = this.afService.af.auth;
-
-        /*this.auth.subscribe(
-            (auth) => {
-                if (auth) {
-                    console.log('AuthService: ', auth.google);
-                    this.setCurrentUser(auth.google);
-                }
-            }
-        );*/
     }
 
     public setCurrentUser(user) {

@@ -31,7 +31,7 @@ export class QuestionnaireService {
         };
 
         this.af.database.list(this.baseUrl).push(playload).then(() => {
-            this.snackBar.open(name + 'has been created', '', {
+            this.snackBar.open('New Questionnaire has been created', '', {
                 duration: 2000,
             }).afterDismissed().subscribe(() => {
                 this.router.navigate(['/']);
