@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AddQuestionModalComponent } from '../add-question-modal/add-question-modal.component';
 import { QuestionService } from '../services/question.service';
-import { ApiService } from '../services/api.service';
-import { FirebaseListObservable } from 'angularfire2';
+import { QuestionnaireService } from '../services/questionnaire.service';
 
 @Component({
     selector: 'app-create',
@@ -12,14 +11,11 @@ import { FirebaseListObservable } from 'angularfire2';
 
 export class CreateComponent implements OnInit {
 
-    public questionnaires: FirebaseListObservable<any>;
     public questions = [];
     public name: string;
     public description: string;
 
-    constructor(public questionService: QuestionService, private apiService: ApiService) {
-        this.questionnaires = this.apiService.getQuestionnaireList();
-    }
+    constructor(public questionService: QuestionService, private questionnaireService: QuestionnaireService) { }
 
     ngOnInit() { }
 
@@ -32,6 +28,6 @@ export class CreateComponent implements OnInit {
     }
 
     save() {
-        this.apiService.create(this.name, this.description, this.questions);
+        this.questionnaireService.create(this.name, this.description, this.questions);
     }
 }

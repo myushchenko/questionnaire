@@ -23,13 +23,14 @@ import { ManageQuestionnaireComponent } from './manage-questionnaire/manage-ques
 import { DialogsService } from './services/dialogs.service';
 import { ConfirmDialog } from './shared/confirm-dialog.component';
 import { QuestionService } from './services/question.service';
-import { ApiService } from './services/api.service';
 import { ResponseComponent } from './response/response.component';
 import { ResponseDetailsComponent } from './response-details/response-details.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { DatepickerModule } from 'angular2-material-datepicker';
 import { FilterPipe } from './pipes/filter.pipe';
+import { QuestionnaireService } from './services/questionnaire.service';
+import { ResponseService } from './services/response.service';
 
 @NgModule({
   imports: [
@@ -64,7 +65,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     FilterPipe
   ],
   entryComponents: [AddQuestionModalComponent, ConfirmDialog],
-  providers: [AuthGuard, AuthService, AuthFirebase, ApiService, DialogsService, QuestionService],
+  providers: [AuthGuard, AuthService, AuthFirebase, QuestionnaireService, ResponseService, DialogsService, QuestionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

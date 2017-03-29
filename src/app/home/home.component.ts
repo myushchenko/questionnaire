@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
-import { ApiService } from '../services/api.service';
+import { QuestionnaireService } from '../services/questionnaire.service';
 
 @Component({
     selector: 'app-home',
@@ -11,9 +11,9 @@ import { ApiService } from '../services/api.service';
 export class HomeComponent implements OnInit {
     public questionnaireList: FirebaseListObservable<any>;
 
-    constructor(private apiService: ApiService) { }
+    constructor(private questionnaireService: QuestionnaireService) { }
 
     ngOnInit() {
-        this.questionnaireList = this.apiService.getQuestionnaireList();
+        this.questionnaireList = this.questionnaireService.getList();
     }
 }

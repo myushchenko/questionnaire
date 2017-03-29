@@ -11,8 +11,17 @@ export class QuestionService {
     }
 
     public addQuestion() {
+        return this.openQuestion();
+    }
+
+    public editQuestion(data) {
+        return this.openQuestion(data);
+    }
+
+    private openQuestion(data?) {
         const config: MdDialogConfig = {
-            width: '750px'
+            width: '750px',
+            data
         };
         const dialogRef = this.dialog.open(AddQuestionModalComponent, config);
 

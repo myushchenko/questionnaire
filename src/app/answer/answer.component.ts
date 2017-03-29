@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../services/api.service';
+import { QuestionnaireService } from '../services/questionnaire.service';
+import { FirebaseListObservable } from 'angularfire2';
+import { ResponseService } from '../services/response.service';
 
 @Component({
     selector: 'app-answer',
@@ -8,18 +10,19 @@ import { ApiService } from '../services/api.service';
     styleUrls: ['./answer.component.less']
 })
 export class AnswerComponent implements OnInit {
+
     public questionnaire: any;
-    public questionsList: any;
+    public questionsList: FirebaseListObservable<any>;
     private subRoter: any;
 
-    constructor(private route: ActivatedRoute, private apiService: ApiService) { }
+    constructor(private route: ActivatedRoute, private questionnaireService: QuestionnaireService,
+        private responseService: ResponseService) { }
 
     ngOnInit() {
         this.subRoter = this.route.params.subscribe(params => {
             const id = params['id'];
-            this.apiService.setBaseUrl(id);
-            this.apiService.getQuestionnaire().subscribe(response => this.questionnaire = response);
-            this.questionsList = this.apiService.getQuestionList();
+            this.questionnaireService.get(id).subscribe(response => this.questionnaire = response);
+            this.questionsList = this.questionnaireService.getQuestionList(id);
         });
     }
 
@@ -28,7 +31,7 @@ export class AnswerComponent implements OnInit {
     }
 
     submit(questions) {
-        this.apiService.submit(this.questionnaire.name, this.questionnaire.description, questions);
+        this.responseService.submit(this.questionnaire.name, this.questionnaire.description, questions);
     }
 
 }

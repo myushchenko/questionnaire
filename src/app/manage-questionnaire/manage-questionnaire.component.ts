@@ -1,43 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionService } from '../services/question.service';
+import { QuestionnaireService } from '../services/questionnaire.service';
 
 @Component({
-  selector: 'app-manage-questionnaire',
-  templateUrl: './manage-questionnaire.component.html',
-  styleUrls: ['./manage-questionnaire.component.less']
+    selector: 'app-manage-questionnaire',
+    templateUrl: './manage-questionnaire.component.html',
+    styleUrls: ['./manage-questionnaire.component.less']
 })
 export class ManageQuestionnaireComponent implements OnInit {
 
-  public questionnaire: any;
-  private subRoter: any;
-  public questionnaireId: any;
-  public questions: any;
+    public questionnaire: FirebaseObjectObservable<any>;
+    public questions: FirebaseListObservable<any>;
+    public questionnaireId: string;
+    private subRoter: any;
 
-  constructor(public af: AngularFire, private route: ActivatedRoute,
-    private router: Router, public questionService: QuestionService) { }
+    constructor(private route: ActivatedRoute, public questionService: QuestionService,
+        private questionnaireService: QuestionnaireService) { }
 
-  ngOnInit() {
+    ngOnInit() {
 
-    this.subRoter = this.route.params.subscribe(params => {
-      this.questionnaireId = params['id'];
-      this.af.database.object(`questionnaires/${this.questionnaireId}`).subscribe(response => {
-        this.questionnaire = response;
-      });
-      this.questions = this.af.database.list(`questionnaires/${this.questionnaireId}/questions`);
-    });
-  }
+        this.subRoter = this.route.params.subscribe(params => {
+            this.questionnaireId = params['id'];
 
-  ngOnDestroy() {
-    this.subRoter.unsubscribe();
-  }
+            this.questionnaireService
+                .get(this.questionnaireId)
+                .subscribe(response => {
+                    this.questionnaire = response;
+                });
 
-  addQuestion() {
-    this.questionService.addQuestion().subscribe(result => {
-      if (result) {
-        this.questions.push(result);
-      }
-    });
-  }
+            this.questions = this.questionnaireService
+                .getQuestionList(this.questionnaireId);
+        });
+    }
+
+    ngOnDestroy() {
+        this.subRoter.unsubscribe();
+    }
+
+    addQuestion() {
+        this.questionService
+            .addQuestion()
+            .subscribe(result => result && this.questions.push(result));
+    }
 }

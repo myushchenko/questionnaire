@@ -1,10 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { Question } from '../models/question';
-import { MdDialogConfig, MdDialog } from '@angular/material';
-import { AddQuestionModalComponent } from '../add-question-modal/add-question-modal.component';
 import { DialogsService } from '../services/dialogs.service';
-import { ApiService } from '../services/api.service';
+import { QuestionService } from '../services/question.service';
+import { QuestionnaireService } from '../services/questionnaire.service';
 
 @Component({
     selector: 'question-type',
@@ -18,31 +16,25 @@ export class QuestionTypeComponent implements OnInit {
     @Input() qId: any;
     @Input() readonly: boolean;
     @Input() edit: boolean;
+
     public answer: string;
 
-    constructor(public dialog: MdDialog, private dialogsService: DialogsService, private api: ApiService) {
-
-    }
+    constructor(private dialogsService: DialogsService, private questionnaireService: QuestionnaireService,
+        public questionService: QuestionService) { }
 
     ngOnInit() {
         if (['BOOLEAN', 'MULTI_CHOICE_MULTI'].includes(this.question.type)) {
             this.question.values = this.question.values.filter(q => !!q.value);
         }
-        this.api.setBaseUrl(this.questionnaireId);
     }
 
     editQuestion(event) {
         event.preventDefault();
-        const config: MdDialogConfig = {
-            width: '750px',
-            data: this.question
-        };
-        const dialogRef = this.dialog.open(AddQuestionModalComponent, config);
 
-        dialogRef.afterClosed().subscribe(result => {
+        this.questionService.editQuestion(this.question).subscribe(result => {
             if (result) {
                 Object.assign(this.question, result);
-                this.api.udateQuestion(this.qId, this.question);
+                this.questionnaireService.udateQuestion(this.questionnaireId, this.qId, this.question);
             }
         });
     }
@@ -52,7 +44,6 @@ export class QuestionTypeComponent implements OnInit {
 
         this.dialogsService
             .confirm('Confirm Delete', 'Are you sure you want delete question?')
-            .subscribe(res => res && this.api.removeQuestion(this.qId));
+            .subscribe(res => res && this.questionnaireService.removeQuestion(this.questionnaireId, this.qId));
     }
-
 }

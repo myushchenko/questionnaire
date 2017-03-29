@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
-import { ApiService } from '../services/api.service';
 import { AuthService } from '../services/auth.service';
 import { DialogsService } from '../services/dialogs.service';
+import { ResponseService } from '../services/response.service';
 
 @Component({
     selector: 'app-response',
@@ -14,18 +14,18 @@ export class ResponseComponent implements OnInit {
     public responseList: FirebaseListObservable<any>;
     public currentUserId: string;
 
-    constructor(private apiService: ApiService, private authService: AuthService,
+    constructor(private responseService: ResponseService, private authService: AuthService,
         private dialogsService: DialogsService) { }
 
     ngOnInit() {
-        this.responseList = this.apiService.getReponseList();
+        this.responseList = this.responseService.getList();
         this.currentUserId = this.authService.currentUser.email;
     }
 
     remove(id) {
         this.dialogsService
             .confirm('Confirm Delete', 'Are you sure you want delete question?')
-            .subscribe(res => res && this.apiService.removeReponse(id));
+            .subscribe(res => res && this.responseService.remove(id));
     }
 
 }
