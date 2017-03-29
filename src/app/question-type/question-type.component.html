@@ -19,7 +19,7 @@
             <md-radio-group class="example-radio-group" [(ngModel)]="answer">
                 <md-radio-button class="example-radio-button" [disabled]="readonly" 
                     *ngFor="let value of question.values"
-                    [(ngModel)]="question.answer">
+                    [value]="value?.value">
                     {{value?.value}}
                 </md-radio-button>
             </md-radio-group>

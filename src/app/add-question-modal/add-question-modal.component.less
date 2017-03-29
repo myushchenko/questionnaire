@@ -1,5 +1,5 @@
 @sprite: '/assets/images/sprite.png';
-@blue: #00a8cf;
+@light-gray: rgb(169, 169, 169);;
 @dark-blue: #00588d;
 @dark-gray: #7c8783;
 @gray: #ddd;
@@ -39,7 +39,7 @@
         }
     }
     .header {
-        color: @blue;
+        color: @dark-blue;
     }
 }
 
@@ -51,7 +51,7 @@
         .title {
             text-align: center;
             width: 100px;
-            color: @blue;
+            color: @light-gray;
             &.active {
                 color: @dark-blue;
             }
@@ -60,39 +60,35 @@
             position: relative;
             margin: 0 5px;
             border-radius: 4px;
-            border: 1px solid @blue;
-            color: @blue;
+            border: 1px solid @light-gray;
+            color: @light-gray;
             display: inline-block;
             height: 73px;
             padding: 7px;
             width: 87px;
             cursor: pointer;
             .boolean {
-                .icon(47px; 47px; 1px; -924px);
-                margin: 5px 8px;
+                .icon(58px; 58px; -10px; -11px);
+                margin: 0 8px;
             }
             .multiple-choice-single {
-                .icon(57px; 18px; 1px; -984px);
+                .icon(58px; 50px; -88px; -67px);
                 margin: 1px 25px;
             }
             .multiple-choice-multiple {
-                .icon(52px; 26px; -48px; -984px);
+                .icon(58px; 50px; -9px; -154px);
                 margin: 3px 22px;
             }
             .date {
-                .icon(49px; 48px; 0px; -1044px);
+                .icon(58px; 53px; -82px; -8px);
                 margin: 0px 10px;
             }
             .short-answer {
-                .icon(19px; 72px; -4px; -1099px);
-                margin: 16px 0px;
-            }
-            .multipart {
-                .short-answer;
-                margin: 5px 0px;
+                .icon(58px; 60px; -63px; -155px);
+                margin: -4px 0px;
             }
             .long-answer {
-                .icon(55px; 72px; -5px; -1144px);
+                .icon(58px; 63px; -60px; -213px);
             }
             .conditional {
                 .icon(55px; 58px; -4px; -1244px);
@@ -103,8 +99,8 @@
                 margin: 5px 19px;
             }
             .numerical {
-                .icon(34px; 25px; -4px; -1418px);
-                margin: 10px 24px;
+                .icon(58px; 58px; -10px; -87px);
+                margin: 4px 16px;
             }
             &.active {
                 border: 1px solid @dark-blue;
