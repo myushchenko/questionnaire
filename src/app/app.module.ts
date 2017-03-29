@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -33,39 +33,39 @@ import { QuestionnaireService } from './services/questionnaire.service';
 import { ResponseService } from './services/response.service';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpModule,
-    AngularFireModule.initializeApp(FirebaseConfig),
-    routes,
-    NgbModule.forRoot(),
-    ReactiveFormsModule,
-    MaterialModule,
-    DatepickerModule
-  ],
-  exports: [
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpModule,
+        AngularFireModule.initializeApp(FirebaseConfig),
+        routes,
+        NgbModule.forRoot(),
+        ReactiveFormsModule,
+        MaterialModule,
+        DatepickerModule
+    ],
+    exports: [
         ConfirmDialog,
     ],
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    CreateComponent,
-    ManageComponent,
-    AboutComponent,
-    AnswerComponent,
-    QuestionTypeComponent,
-    AddQuestionModalComponent,
-    ManageQuestionnaireComponent,
-    ConfirmDialog,
-    ResponseComponent,
-    ResponseDetailsComponent,
-    FilterPipe
-  ],
-  entryComponents: [AddQuestionModalComponent, ConfirmDialog],
-  providers: [AuthGuard, AuthService, AuthFirebase, QuestionnaireService, ResponseService, DialogsService, QuestionService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        HomeComponent,
+        CreateComponent,
+        ManageComponent,
+        AboutComponent,
+        AnswerComponent,
+        QuestionTypeComponent,
+        AddQuestionModalComponent,
+        ManageQuestionnaireComponent,
+        ConfirmDialog,
+        ResponseComponent,
+        ResponseDetailsComponent,
+        FilterPipe
+    ],
+    entryComponents: [AddQuestionModalComponent, ConfirmDialog],
+    providers: [AuthGuard, AuthService, AuthFirebase, QuestionnaireService, ResponseService, DialogsService, QuestionService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
