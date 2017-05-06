@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuestionnaireService } from '../services/questionnaire.service';
-import { FirebaseListObservable } from 'angularfire2';
+import { FirebaseListObservable } from 'angularfire2/database';
 import { ResponseService } from '../services/response.service';
 
 @Component({

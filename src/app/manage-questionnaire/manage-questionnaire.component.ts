@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionService } from '../services/question.service';
 import { QuestionnaireService } from '../services/questionnaire.service';

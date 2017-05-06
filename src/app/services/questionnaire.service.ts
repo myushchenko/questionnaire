@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFire } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
@@ -9,15 +9,15 @@ export class QuestionnaireService {
 
     private baseUrl = 'questionnaires';
 
-    constructor(private af: AngularFire, private router: Router,
+    constructor(private db: AngularFireDatabase, private router: Router,
         private snackBar: MdSnackBar, private authService: AuthService) { }
 
     public getList() {
-        return this.af.database.list(this.baseUrl);
+        return this.db.list(this.baseUrl);
     }
 
     public get(questionnaireId) {
-        return this.af.database.object(this.baseUrl + `/${questionnaireId}`);
+        return this.db.object(this.baseUrl + `/${questionnaireId}`);
     }
 
     public create(name, description, questions) {
@@ -30,7 +30,7 @@ export class QuestionnaireService {
             questions
         };
 
-        this.af.database.list(this.baseUrl).push(playload).then(() => {
+        this.db.list(this.baseUrl).push(playload).then(() => {
             this.snackBar.open('New Questionnaire has been created', '', {
                 duration: 2000,
             }).afterDismissed().subscribe(() => {
@@ -40,23 +40,23 @@ export class QuestionnaireService {
     }
 
     public udapte(questionnaireId) {
-        this.af.database.object(this.baseUrl + `/${questionnaireId}`).update({ date: new Date() });
+        this.db.object(this.baseUrl + `/${questionnaireId}`).update({ date: new Date() });
     }
 
     public remove(questionnaireId) {
-        this.af.database.object(this.baseUrl + `/${questionnaireId}`).remove();
+        this.db.object(this.baseUrl + `/${questionnaireId}`).remove();
     }
 
     public getQuestionList(questionnaireId) {
-        return this.af.database.list(this.baseUrl + `/${questionnaireId}/questions`);
+        return this.db.list(this.baseUrl + `/${questionnaireId}/questions`);
     }
 
     public udateQuestion(questionnaireId, qId, question) {
-        this.af.database.object(this.baseUrl + `/${questionnaireId}/questions/${qId}`)
+        this.db.object(this.baseUrl + `/${questionnaireId}/questions/${qId}`)
             .update(question).then(_ => this.udapte(questionnaireId));
     }
 
     public removeQuestion(questionnaireId, qId) {
-        this.af.database.object(this.baseUrl + `/${questionnaireId}/questions/${qId}`).remove();
+        this.db.object(this.baseUrl + `/${questionnaireId}/questions/${qId}`).remove();
     }
 }

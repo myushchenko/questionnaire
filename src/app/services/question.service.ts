@@ -11,7 +11,7 @@ export class QuestionService {
     }
 
     public addQuestion() {
-        return this.openQuestion();
+        return this.openQuestion({});
     }
 
     public editQuestion(data) {

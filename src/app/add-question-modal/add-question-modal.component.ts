@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { QuestionValue, Question } from '../models/question';
 import * as _ from 'lodash';
 
@@ -19,14 +19,14 @@ export class AddQuestionModalComponent {
     private result = this.resultType();
     public question: Question = new Question('BOOLEAN', '', this.result.boolean);
 
-    constructor(public dialogRef: MdDialogRef<AddQuestionModalComponent>) { }
-
-    ngOnInit() {
-        if (this.dialogRef.config && this.dialogRef.config.data) {
-            Object.assign(this.question, this.dialogRef.config.data);
+    constructor(public dialogRef: MdDialogRef<AddQuestionModalComponent>, @Inject(MD_DIALOG_DATA) private data: any) {
+        if (data && data.type) {
+            Object.assign(this.question, data);
             this.btnText = 'Save';
         }
     }
+
+    ngOnInit() {}
 
     addValue() {
         this.question.values.push(new QuestionValue('', ''));

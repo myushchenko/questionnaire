@@ -20,16 +20,12 @@ export class AppComponent {
     }
 
     private initLoginUser() {
-        this.authService.auth.subscribe((res) => {
-            if (res && res.auth) {
-                if (res.google) {
-                    this.loggedUser = res.google.displayName;
-                    return;
-                }
-                this.loggedUser = res.auth.email;
-                return;
-            }
-            this.router.navigate(['/login']);
+        this.authService.auth.authState.subscribe(res => {
+             if (!res) {
+                 this.router.navigate(['/login']);
+                 return;
+             }
+             this.loggedUser = res.displayName || res.email;
         });
     }
 

@@ -2,9 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MaterialModule } from '@angular/material';
+
+import { MaterialModule, MdCheckboxModule } from '@angular/material';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -39,11 +45,14 @@ import { RegistrationPageComponent } from './registration-page/registration-page
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
-        AngularFireModule.initializeApp(FirebaseConfig),
+        AngularFireModule.initializeApp(FirebaseConfig),// imports firebase/app needed for everything
+        AngularFireDatabaseModule, // imports firebase/database, only needed for database features
+        AngularFireAuthModule, // imports firebase/auth, only needed for auth features
         routes,
         NgbModule.forRoot(),
         ReactiveFormsModule,
         MaterialModule,
+        MdCheckboxModule,
         DatepickerModule
     ],
     exports: [

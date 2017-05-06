@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { AuthFirebase } from '../providers/auth.firebase';
-import { AngularFireAuth } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Injectable()
 export class AuthService {
@@ -10,7 +10,7 @@ export class AuthService {
     public auth: AngularFireAuth;
 
     constructor(public afService: AuthFirebase) {
-        this.auth = this.afService.af.auth;
+        this.auth = this.afService.afAuth;
     }
 
     public setCurrentUser(user) {

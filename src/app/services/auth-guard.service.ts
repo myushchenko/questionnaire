@@ -8,13 +8,13 @@ export class AuthGuard implements CanActivate {
     constructor(private authService: AuthService, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        return this.authService.auth.map((res) => {
-            if (res && res.auth) {
-                this.authService.setCurrentUser(res.google || res.auth);
-                return true;
-            }
-            this.router.navigate(['/login']);
-            return false;
+        return this.authService.auth.authState.map(res => {
+             if (!res) {
+                 this.router.navigate(['/login']);
+                 return false;
+             }
+             this.authService.setCurrentUser(res);
+             return true;
         });
     }
 }

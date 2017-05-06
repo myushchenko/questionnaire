@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,16 +13,16 @@ export class ResponseDetailsComponent implements OnInit {
     public questionnaire: any;
     public responseQiestionsList: FirebaseListObservable<any[]>;
 
-    constructor(public af: AngularFire, private route: ActivatedRoute,
+    constructor(public db: AngularFireDatabase, private route: ActivatedRoute,
         private router: Router) { }
 
     ngOnInit() {
         this.subRoter = this.route.params.subscribe(params => {
             const id = params['id'];
-            this.af.database.object(`responses/${id}`).subscribe(response => {
+            this.db.object(`responses/${id}`).subscribe(response => {
                 this.questionnaire = response;
             });
-            this.responseQiestionsList = this.af.database.list(`responses/${id}/questions`);
+            this.responseQiestionsList = this.db.list(`responses/${id}/questions`);
         });
     }
 
