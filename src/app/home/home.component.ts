@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2/database';
+
 import { QuestionnaireService } from '../services/questionnaire.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { QuestionnaireService } from '../services/questionnaire.service';
 })
 
 export class HomeComponent implements OnInit {
+    
     public questionnaireList: FirebaseListObservable<any>;
 
     constructor(private questionnaireService: QuestionnaireService) { }

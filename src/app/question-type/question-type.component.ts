@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { Question } from '../models/question';
 import { DialogsService } from '../services/dialogs.service';
 import { QuestionService } from '../services/question.service';
@@ -9,6 +10,7 @@ import { QuestionnaireService } from '../services/questionnaire.service';
     templateUrl: './question-type.component.html',
     styleUrls: ['./question-type.component.less']
 })
+
 export class QuestionTypeComponent implements OnInit {
 
     @Input() questionnaireId: any;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FirebaseListObservable } from 'angularfire2/database';
 import { AuthService } from '../services/auth.service';
 import { DialogsService } from '../services/dialogs.service';
@@ -9,6 +10,7 @@ import { ResponseService } from '../services/response.service';
     templateUrl: './response.component.html',
     styleUrls: ['./response.component.less']
 })
+
 export class ResponseComponent implements OnInit {
 
     public responseList: FirebaseListObservable<any>;

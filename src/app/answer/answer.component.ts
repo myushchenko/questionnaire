@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { QuestionnaireService } from '../services/questionnaire.service';
 import { FirebaseListObservable } from 'angularfire2/database';
+
+import { QuestionnaireService } from '../services/questionnaire.service';
 import { ResponseService } from '../services/response.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { ResponseService } from '../services/response.service';
     templateUrl: './answer.component.html',
     styleUrls: ['./answer.component.less']
 })
+
 export class AnswerComponent implements OnInit {
 
     public questionnaire: any;
@@ -21,7 +23,10 @@ export class AnswerComponent implements OnInit {
     ngOnInit() {
         this.subRoter = this.route.params.subscribe(params => {
             const id = params['id'];
-            this.questionnaireService.get(id).subscribe(response => this.questionnaire = response);
+            this.questionnaireService
+                .get(id)
+                .subscribe(response => this.questionnaire = response);
+
             this.questionsList = this.questionnaireService.getQuestionList(id);
         });
     }

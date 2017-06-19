@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { MdSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { MdSnackBar } from '@angular/material';
+import { AngularFireDatabase } from 'angularfire2/database';
+
 import { AuthService } from './auth.service';
 
 @Injectable()

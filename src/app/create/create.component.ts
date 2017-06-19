@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { AddQuestionModalComponent } from '../add-question-modal/add-question-modal.component';
 import { QuestionService } from '../services/question.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
@@ -20,14 +21,13 @@ export class CreateComponent implements OnInit {
     ngOnInit() { }
 
     addQuestion() {
-        this.questionService.addQuestion().subscribe(result => {
-            if (result) {
-                this.questions.push(result);
-            }
-        });
+        this.questionService
+            .addQuestion()
+            .subscribe(result => result && this.questions.push(result));
     }
 
     save() {
-        this.questionnaireService.create(this.name, this.description, this.questions);
+        this.questionnaireService
+            .create(this.name, this.description, this.questions);
     }
 }

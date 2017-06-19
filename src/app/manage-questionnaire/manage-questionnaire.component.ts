@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+
 import { QuestionService } from '../services/question.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
 
@@ -9,6 +10,7 @@ import { QuestionnaireService } from '../services/questionnaire.service';
     templateUrl: './manage-questionnaire.component.html',
     styleUrls: ['./manage-questionnaire.component.less']
 })
+
 export class ManageQuestionnaireComponent implements OnInit {
 
     public questionnaire: FirebaseObjectObservable<any>;

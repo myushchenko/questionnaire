@@ -1,6 +1,6 @@
-
 import { Injectable } from '@angular/core';
 import { MdDialogConfig, MdDialog } from '@angular/material';
+
 import { AddQuestionModalComponent } from '../add-question-modal/add-question-modal.component';
 
 @Injectable()

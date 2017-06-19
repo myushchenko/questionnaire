@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { AuthFirebase } from '../providers/auth.firebase';
 
 @Component({
@@ -24,14 +25,10 @@ export class LoginComponent implements OnInit {
     loginWithEmail(event, email, password) {
         event.preventDefault();
 
-        this.afService.loginWithEmail(email, password).then(() => {
-            this.router.navigate(['']);
-        }).catch((error: any) => {
-            if (error) {
-                this.error = error;
-                console.log(this.error);
-            }
-        });
+        this.afService
+            .loginWithEmail(email, password)
+            .then(() => this.router.navigate(['']))
+            .catch((error: any) => this.error = error);
     }
 
 }
