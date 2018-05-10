@@ -1,13 +1,13 @@
 # Questionnaire Aplication
 
-This project for learning purposes of Angular 2(4)
+This project for learning purposes of Angular 6
 
 Technologies: 
-- Angular 4
-- Angular CLI
-- Angularfire 2
+- Angular 6
+- Angular CLI 6
+- Angularfire 5
 - Typescript 2.2
-- Material 2
+- Material 6
 - Bootstrap 4
 ...
 
