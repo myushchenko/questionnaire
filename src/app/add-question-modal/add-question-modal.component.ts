@@ -1,12 +1,13 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit, Input, Inject, ViewEncapsulation } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { QuestionValue, Question } from '../models/question';
 import * as _ from 'lodash';
 
 @Component({
     selector: 'app-add-question-modal',
     templateUrl: './add-question-modal.component.html',
-    styleUrls: ['./add-question-modal.component.less']
+    styleUrls: ['./add-question-modal.component.less'],
+    encapsulation: ViewEncapsulation.None
 })
 export class AddQuestionModalComponent {
     public qTypes = [
@@ -19,10 +20,13 @@ export class AddQuestionModalComponent {
     private result = this.resultType();
     public question: Question = new Question('BOOLEAN', '', this.result.boolean);
 
-    constructor(public dialogRef: MdDialogRef<AddQuestionModalComponent>, @Inject(MD_DIALOG_DATA) private data: any) {
+    constructor(public dialogRef: MatDialogRef<AddQuestionModalComponent>, @Inject(MAT_DIALOG_DATA) private data: any) {
         if (data && data.type) {
             Object.assign(this.question, data);
             this.btnText = 'Save';
+            this.responseTypes.forEach(item => {
+                item.active = item.id === data.type;
+            });
         }
     }
 

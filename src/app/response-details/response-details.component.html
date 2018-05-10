@@ -1,13 +1,17 @@
 <div *ngIf="responseQiestionsList | async as questions; else loading;">
     <div class="card" *ngIf="questionnaire">
         <h3 class="card-header">{{questionnaire.name}}</h3>
-        <div class="clearfix"><i class="mr-3 float-right">Submitted by {{questionnaire.submittedBy}} on {{questionnaire.date | date:'fullDate'}} at {{questionnaire.date | date:'mediumTime'}}</i></div>
-        <div class="card-block" *ngFor="let q of questions">
+        <div class="clearfix">
+            <i class="mr-3 float-right">
+                Submitted by {{questionnaire.submittedBy}} on {{questionnaire.date | date:'fullDate'}} at {{questionnaire.date | date:'mediumTime'}}
+            </i>
+        </div>
+        <div class="card-body" *ngFor="let q of questions">
             <p class="card-text">{{q.title}}</p>
             <question-type [readonly]="1" [question]="q"></question-type>
         </div>
     </div>
 </div>
 <ng-template #loading>
-    <div class="loader"></div>
+    <mat-spinner class="loader-container"></mat-spinner>
 </ng-template>

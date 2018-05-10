@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
+// import { FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 
 import { QuestionService } from '../services/question.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
+import { Observable } from 'rxjs/Observable';
+import { AngularFireList } from 'angularfire2/database';
 
 @Component({
     selector: 'app-manage-questionnaire',
@@ -13,10 +15,12 @@ import { QuestionnaireService } from '../services/questionnaire.service';
 
 export class ManageQuestionnaireComponent implements OnInit {
 
-    public questionnaire: FirebaseObjectObservable<any>;
-    public questions: FirebaseListObservable<any>;
+    public questionnaire: Observable<any[]>;
+    public questions: Observable<any[]>;
     public questionnaireId: string;
+
     private subRoter: any;
+    private questionsRef: AngularFireList<any>;
 
     constructor(private route: ActivatedRoute, public questionService: QuestionService,
         private questionnaireService: QuestionnaireService) { }
@@ -32,8 +36,14 @@ export class ManageQuestionnaireComponent implements OnInit {
                     this.questionnaire = response;
                 });
 
-            this.questions = this.questionnaireService
-                .getQuestionList(this.questionnaireId);
+            this.questionsRef = this.questionnaireService.getQuestionFireList(this.questionnaireId);
+
+            this.questions = this.questionsRef.snapshotChanges().map(actions => {
+                return actions.map((a: any) => {
+                    const id = a.payload.key;
+                    return { id, ...a.payload.val() };
+                });
+            });
         });
     }
 
@@ -44,6 +54,6 @@ export class ManageQuestionnaireComponent implements OnInit {
     addQuestion() {
         this.questionService
             .addQuestion()
-            .subscribe(result => result && this.questions.push(result));
+            .subscribe(result => result && this.questionsRef.push(result));
     }
 }

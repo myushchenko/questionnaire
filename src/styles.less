@@ -1,32 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 .clickable {
     cursor: pointer
 }
 
-.loader {
-    border: 5px solid #f3f3f3;
-    -webkit-animation: spin 1s linear infinite;
-    animation: spin 1s linear infinite;
-    border-top: 5px solid #555;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    margin: 30px auto;
+.loader-container {
+    margin: 50px auto;
 }
 
 .no-text {
-    width: 100px;
+    width: 210px;
     height: 20px;
+    text-align: center;
+    font-weight: bold;
     margin: 30px auto;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
 }

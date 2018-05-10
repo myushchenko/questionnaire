@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FirebaseListObservable } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 import { QuestionnaireService } from '../services/questionnaire.service';
 import { ResponseService } from '../services/response.service';
@@ -14,7 +14,7 @@ import { ResponseService } from '../services/response.service';
 export class AnswerComponent implements OnInit {
 
     public questionnaire: any;
-    public questionsList: FirebaseListObservable<any>;
+    public questionsList: Observable<any>;
     private subRoter: any;
 
     constructor(private route: ActivatedRoute, private questionnaireService: QuestionnaireService,

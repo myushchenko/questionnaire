@@ -3,13 +3,13 @@
   <div class="clearfix">
     <i class="mr-3 float-right">Created by {{questionnaire.submittedBy}} on {{questionnaire.date | date:'fullDate'}} at {{questionnaire.date | date:'mediumTime'}}</i>
   </div>
-  <div class="card-block" *ngFor="let q of questions|async">
+  <div class="card-body" *ngFor="let q of questions|async">
     <p class="card-text">{{q.title}}</p>
-    <question-type [question]="q" 
-      [readonly]="1" 
+    <question-type [question]="q"
+      [readonly]="1"
       [edit]="1"
       [questionnaireId]="questionnaireId"
-      [qId]="q.$key"></question-type>
+      [qId]="q.id"></question-type>
   </div>
 </div>
 <div class="float-left mt-2">

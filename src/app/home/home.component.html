@@ -1,13 +1,24 @@
 <div class="card">
-    <h3 class="card-header">List of questionnaires</h3>
     <div *ngIf="questionnaireList | async as questionnaires; else loading;">
-        <div class="card-block" *ngFor="let q of questionnaires">
-            <h4 class="card-title">{{q.name}}</h4>
-            <div *ngIf="q.description"><i class="card-text">{{q.description}}</i><br><br></div>
-            <a [routerLink]="['/answer', q.$key]" class="btn btn-primary">Answer</a>
-        </div>
+        <mat-list>
+            <h5 class="card-header" mat-subheader>
+                List of questionnaires
+                <mat-checkbox class="float-right" [(ngModel)]="showMine">Show only mine</mat-checkbox>
+            </h5>
+
+            <mat-list-item *ngFor="let q of filterQuestionnaires(questionnaires)">
+                <mat-icon mat-list-icon>note</mat-icon>
+                <h4 mat-line><b>{{q.name}}</b></h4>
+                <i mat-line> {{q.date | date}}</i>
+                <p mat-line *ngIf="q.description">
+                    <i class="card-text">{{q.description}}</i>
+                    <br>
+                </p>
+                <a [routerLink]="['/answer', q.id]" mat-button color="primary">Answer</a>
+            </mat-list-item>
+        </mat-list>
     </div>
 </div>
 <ng-template #loading>
-    <div class="loader"></div>
+    <mat-spinner class="loader-container"></mat-spinner>
 </ng-template>

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { MdDialogConfig, MdDialog } from '@angular/material';
+import { MatDialogConfig, MatDialog } from '@angular/material';
 
 import { AddQuestionModalComponent } from '../add-question-modal/add-question-modal.component';
 
 @Injectable()
 export class QuestionService {
 
-    constructor(public dialog: MdDialog) {
+    constructor(public dialog: MatDialog) {
 
     }
 
@@ -19,7 +19,7 @@ export class QuestionService {
     }
 
     private openQuestion(data?) {
-        const config: MdDialogConfig = {
+        const config: MatDialogConfig = {
             width: '750px',
             data
         };

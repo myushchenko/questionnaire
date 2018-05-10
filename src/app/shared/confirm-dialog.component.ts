@@ -1,4 +1,4 @@
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,9 +6,9 @@ import { Component } from '@angular/core';
     template: `
         <p>{{ title }}</p>
         <p>{{ message }}</p>
-        <button type="button" md-raised-button 
+        <button type="button" class="mr-1" mat-raised-button color="warn"
             (click)="dialogRef.close(true)">OK</button>
-        <button type="button" md-button 
+        <button type="button" mat-raised-button color="accent"
             (click)="dialogRef.close()">Cancel</button>
     `,
 })
@@ -17,7 +17,7 @@ export class ConfirmDialog {
     public title: string;
     public message: string;
 
-    constructor(public dialogRef: MdDialogRef<ConfirmDialog>) {
+    constructor(public dialogRef: MatDialogRef<ConfirmDialog>) {
 
     }
 }

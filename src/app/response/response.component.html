@@ -1,37 +1,34 @@
-<div *ngIf="responseList |  async as responses; else loading;">
-    <md-tab-group>
-        <md-tab label="All Responses">
+<div *ngIf="responseList | async as responses; else loading;">
+    <mat-tab-group>
+        <mat-tab label="My Responses">
             <div class="card">
-
-                <div class="card-block" *ngFor="let q of responses">
+                <div class="card-body" *ngFor="let q of userResponses(responses)">
+                    <h4 class="card-title">{{q.name}}</h4>
+                    <i class="card-text">{{q.description}}</i>
+                    <br><br>
+                    <a class="mr-1" [routerLink]="['/response', q.id]" mat-raised-button color="primary">View</a>
+                    <button (click)="remove(q.id)" mat-raised-button color="warn">Remove</button>
+                </div>
+                <div class="no-text" *ngIf="!userResponses(responses).length">
+                    You don't have responses!
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="All Responses">
+            <div class="card">
+                <div class="card-body" *ngFor="let q of responses">
                     <h4 class="card-title">{{q.name}}</h4>
                     <i class="card-text">{{q.description}}</i><br><br>
-                    <a [routerLink]="['/response', q.$key]" class="btn btn-primary">View</a>
+                    <a [routerLink]="['/response', q.id]" mat-raised-button color="primary">View</a>
                 </div>
-
                 <div class="no-text" *ngIf="!responses.length">
                     No responses
                 </div>
             </div>
-        </md-tab>
-        <md-tab label="My Responses">
-            <div class="card">
-
-                <div class="card-block" *ngFor="let q of responses | filter:{submittedById: currentUserId};">
-                    <h4 class="card-title">{{q.name}}</h4>
-                    <i class="card-text">{{q.description}}</i><br><br>
-                    <a [routerLink]="['/response', q.$key]" class="btn btn-primary">View</a>
-                    <button (click)="remove(q.$key)" class="btn btn-primary">Remove</button>
-                </div>
-
-                <div class="no-text" *ngIf="!responses.length">
-                    No responses
-                </div>
-            </div>
-        </md-tab>
-    </md-tab-group>
+        </mat-tab>
+    </mat-tab-group>
 </div>
 
 <ng-template #loading>
-    <div class="loader"></div>
+    <mat-spinner class="loader-container"></mat-spinner>
 </ng-template>

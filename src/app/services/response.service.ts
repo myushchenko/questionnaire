@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ResponseService {
@@ -11,10 +12,15 @@ export class ResponseService {
     private baseUrl = 'responses';
 
     constructor(private db: AngularFireDatabase, private router: Router,
-        private snackBar: MdSnackBar, private authService: AuthService) { }
+        private snackBar: MatSnackBar, private authService: AuthService) { }
 
-    public getList() {
-        return this.db.list(this.baseUrl);
+    public getList(): Observable<any> {
+        return this.db.list(this.baseUrl).snapshotChanges().map(actions => {
+            return actions.map((a: any) => {
+                const id = a.payload.key;
+                return { id, ...a.payload.val() };
+            });
+        });
     }
 
     public get(questionnaireId) {

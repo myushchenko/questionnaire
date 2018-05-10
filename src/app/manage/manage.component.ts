@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseListObservable } from 'angularfire2/database';
+// import { FirebaseListObservable } from 'angularfire2/database';
 
 import { DialogsService } from '../services/dialogs.service';
 import { AuthService } from '../services/auth.service';
 import { QuestionnaireService } from '../services/questionnaire.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-manage',
@@ -13,15 +14,15 @@ import { QuestionnaireService } from '../services/questionnaire.service';
 
 export class ManageComponent implements OnInit {
 
-    public questionnaireList: FirebaseListObservable<any>;
-    public currentUserId: string;
+    public questionnaireList: Observable<any>;
 
-    constructor(private questionnaireService: QuestionnaireService, private dialogsService: DialogsService,
+    constructor(
+        private questionnaireService: QuestionnaireService,
+        private dialogsService: DialogsService,
         private authService: AuthService) {}
 
     ngOnInit() {
         this.questionnaireList = this.questionnaireService.getList();
-        this.currentUserId = this.authService.currentUser.email;
     }
 
     remove(id) {
@@ -30,8 +31,7 @@ export class ManageComponent implements OnInit {
             .subscribe(res => res && this.questionnaireService.remove(id));
     }
 
-    isCurrentUser(q) {
-        return q.submittedById === this.authService.currentUser.email;
+    userQuestionnaires(questionnaires: [any]) {
+        return questionnaires.filter(q => q.submittedById === this.authService.currentUser.email)
     }
-
 }

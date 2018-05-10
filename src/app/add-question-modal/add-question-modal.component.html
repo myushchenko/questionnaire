@@ -1,12 +1,13 @@
-<h1 md-dialog-title>Add New Question
+<h4 mat-dialog-title>
+    Add New Question
     <button type="button" class="close" aria-label="Close" (click)="dialogRef.close()">
         <span aria-hidden="true">&times;</span>
     </button>
-</h1>
-<div md-dialog-content>
+</h4>
+<div mat-dialog-content>
     <form #formQuestion="ngForm">
         <div class="response-types">
-            <div class="response-type-container" 
+            <div class="response-type-container"
                 [ngClass]="{disabled: responseTypesDisabled}"
                 (click)="responseTypesDisabled || onResponseType(responseType, formQuestion)"
                 *ngFor="let responseType of responseTypes">
@@ -31,7 +32,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <textarea 
+                    <textarea
                         name="title"
                         rows="3"
                         [(ngModel)]="question.title"
@@ -42,11 +43,11 @@
                     </div>
                 </div>
                 <div class="col-md-6" *ngIf="isChoiseQuestionType()">
-                    <div class="choice mr20" 
+                    <div class="choice mr20"
                         *ngFor="let choice of question.values; let i = index">
                         <input type="text" name="{{'choice_' + i}}"
-                            class="form-control" 
-                            [(ngModel)]="choice.value" 
+                            class="form-control"
+                            [(ngModel)]="choice.value"
                             required/>
                         <a class="clickable" (click)="question.values.splice(chKey,1)">X</a>
                     </div>
@@ -60,20 +61,22 @@
                     <div class="red" *ngIf="formQuestion.$submitted && isOptionsEmpty() && !isOptionsLess() && !isQuestionDuplicate()">
                         <p>Choices cannot be blank</p>
                     </div>
-                    <input type="button" 
-                        class="btn btn-primary btn-sm" 
-                        *ngIf="!isFullConditional()" 
-                        (click)="addChoiceToQuestion()" 
+                    <input type="button"
+                        class="btn btn-primary btn-sm"
+                        *ngIf="!isFullConditional()"
+                        (click)="addChoiceToQuestion()"
                         value="Add an answer choice" />
                 </div>
             </div>
         </div>
     </form>
 </div>
-<div md-dialog-actions class="float-right">
-    <button type="button" class="btn btn-sm btn-primary mr-1" (click)="dialogRef.close()">Cancel</button>
-    <button type="button" 
-        class="btn btn-sm btn-success"
-        [ngClass]="{'btn-danger': formQuestion.form.invalid}" 
+<div mat-dialog-actions class="float-right">
+    <button type="button"
+        mat-raised-button
+        color="primary"
+        class="mr-1"
+        [ngClass]="{'btn-danger': formQuestion.form.invalid}"
         (click)="formQuestion.form.invalid ||save()">{{btnText}}</button>
+    <button type="button" mat-raised-button color="warn" (click)="dialogRef.close()">Cancel</button>
 </div>

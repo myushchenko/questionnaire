@@ -1,16 +1,19 @@
-<a routerLink="/create" class="btn btn-primary">Create new</a><br/><br/>
+<a routerLink="/create" mat-raised-button>Create new</a><br/><br/>
 
 <div *ngIf="questionnaireList | async as questionnaires; else loading;">
     <div class="card">
         <h3 class="card-header">Questionnaires</h3>
-        <div class="card-block" *ngFor="let q of questionnaires">
+        <div class="card-body" *ngFor="let q of userQuestionnaires(questionnaires)">
             <h4 class="card-title">{{q.name}}</h4>
             <div *ngIf="q.description"><i class="card-text">{{q.description}}</i><br><br></div>
-            <a *ngIf="isCurrentUser(q)" [routerLink]="['/manage', q.$key]" class="btn btn-primary">Edit</a>
-            <button *ngIf="isCurrentUser(q)" (click)="remove(q.$key)" class="btn btn-primary">Remove</button>
+            <a [routerLink]="['/manage', q.id]" class="mr-1" mat-raised-button color="primary">Edit</a>
+            <button (click)="remove(q.id)" mat-raised-button color="warn">Remove</button>
+        </div>
+        <div class="no-text" *ngIf="!userQuestionnaires(questionnaires).length">
+            You don't have own questionnaires!
         </div>
     </div>
 </div>
 <ng-template #loading>
-    <div class="loader"></div>
+    <mat-spinner class="loader-container"></mat-spinner>
 </ng-template>
